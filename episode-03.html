@@ -8,8 +8,8 @@
   <title>Episode — The Search for Sidequests</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { color-scheme: dark; --page-bg: #08090b; --accent: #c3d3dc; --muted: #82909a; --rule: #29343b; }
-    body { min-height: 100vh; background: var(--page-bg); color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    :root { color-scheme: light; --page-bg: #fff; --accent: #516c78; --muted: #69777d; --rule: #d7dde0; }
+    body { min-height: 100vh; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
     .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
     .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
     .site-brand-text { display: block; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 900; }
@@ -22,12 +22,17 @@
     .site-menu-links a { display: block; margin-bottom: 14px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; transition: color .3s ease, text-shadow .3s ease; }
     .site-menu-links a:hover { color: var(--accent); text-shadow: 0 0 12px #31516a; }
     .site-menu.is-open .site-menu-links { display: block; }
-    main { width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(172px, calc(25vh - 48px)) 0 110px; }
-    .series-link { display: inline-block; color: var(--muted); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-decoration: none; transition: color .25s ease; }
-    .series-link:hover { color: var(--accent); }
-    h1 { max-width: 1000px; margin-top: 18px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(2.7rem, 7vw, 6rem); font-weight: 900; line-height: 1.02; letter-spacing: 0; }
-    .video-placeholder { display: grid; aspect-ratio: 16 / 9; margin-top: 58px; place-items: center; border: 1px solid var(--rule); background: #101519; color: var(--muted); font-size: .65rem; letter-spacing: .16em; }
-    .episode-description { max-width: 680px; margin-top: 28px; color: #b5c0c5; font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.7; }
+    main { width: 100%; margin: 0; padding: 0; }
+    .episode-hero { position: relative; display: flex; min-height: 88svh; align-items: flex-end; padding: 150px 40px 64px; overflow: hidden; background: #08090b; }
+    .video-placeholder { position: absolute; inset: 0; display: grid; margin: 0; place-items: center; background: #08090b; color: rgba(255,255,255,.34); font-size: .68rem; letter-spacing: .2em; }
+    .video-placeholder::after { position: absolute; z-index: 0; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.12) 10%, transparent 42%, rgba(0,0,0,.66) 100%); content: ''; }
+    .placeholder-label { position: absolute; z-index: 1; right: clamp(20px, 4vw, 56px); bottom: clamp(20px, 4vw, 44px); opacity: .28; font-family: Georgia, 'Times New Roman', serif; font-size: .72rem; font-style: italic; letter-spacing: .12em; }
+    .episode-heading { position: relative; z-index: 1; width: min(1100px, 100%); margin: 0 auto; }
+    .series-link { display: inline-block; color: rgba(255,255,255,.8); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-decoration: none; transition: color .25s ease; }
+    .series-link:hover { color: #fff; }
+    h1 { max-width: 1000px; margin-top: 15px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(2.7rem, 7vw, 6rem); font-weight: 900; line-height: 1.02; letter-spacing: 0; }
+    .episode-details { width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: 58px 0 110px; }
+    .episode-description { max-width: 680px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.7; }
     footer { padding: 28px 24px 34px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; }
     @media (max-width: 600px) {
       .site-header { top: 20px; left: 20px; right: 20px; height: 60px; }
@@ -36,15 +41,50 @@
       .site-menu { gap: 12px; }
       .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; }
       .site-menu-links { top: 30px; right: 52px; }
-      main { width: calc(100% - 40px); padding-top: 117px; }
-      h1 { margin-top: 15px; font-size: clamp(2.25rem, 10vw, 4rem); }
-      .video-placeholder { margin-top: 38px; }
-      .episode-description { margin-top: 22px; font-size: 1rem; }
+      .episode-hero { min-height: 78svh; padding: 120px 20px 38px; }
+      h1 { margin-top: 12px; font-size: clamp(2.25rem, 10vw, 4rem); }
+      .episode-details { width: calc(100% - 40px); padding: 36px 0 80px; }
+      .episode-description { font-size: 1rem; }
     }
+
+    /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
+    .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
+    .site-header.is-hidden { transform: translateY(-100%); }
+    .site-header.is-visible-on-scroll { background: transparent; box-shadow: none; }
+    .site-header.is-visible-on-scroll::after { position: absolute; right: 40px; bottom: 0; left: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); content: ''; filter: blur(1px); pointer-events: none; }
+    .site-header .site-brand { top: 32px; left: 40px; }
+    .site-header .site-menu { top: 32px; right: 40px; }
+    .site-header .site-brand,
+    .site-header .site-menu-button,
+    .site-header .site-about,
+    .site-header .site-menu-links a { color: #111; text-shadow: none; }
+    .site-header.is-on-image .site-brand,
+    .site-header.is-on-image .site-menu-button,
+    .site-header.is-on-image .site-about,
+    .site-header.is-on-image .site-menu-links a { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+    .site-header.is-visible-on-scroll::after { background: linear-gradient(90deg, transparent, rgba(20, 24, 25, .12) 12%, rgba(20, 24, 25, .18) 50%, rgba(20, 24, 25, .12) 88%, transparent); }
+    .site-header.is-visible-on-scroll.is-on-image::after { background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); }
+    .site-header.is-visible-on-scroll .site-menu-links { padding: 10px 0 2px; background: transparent; }
+    .site-header.is-visible-on-scroll .site-menu-links a:hover,
+    .site-header.is-visible-on-scroll .site-menu-button:hover,
+    .site-header.is-visible-on-scroll .site-about:hover { color: var(--accent, #c3d3dc); text-shadow: none; }
+    .site-header.is-visible-on-scroll .site-menu-button:focus-visible,
+    .site-header.is-visible-on-scroll .site-about:focus-visible,
+    .site-header.is-visible-on-scroll .site-menu-links a:focus-visible { outline-color: var(--accent, #c3d3dc); }
+    @media (max-width: 600px) {
+      .site-header { height: 80px; }
+      .site-header.is-visible-on-scroll::after { right: 20px; left: 20px; }
+      .site-header .site-brand { top: 20px; left: 20px; }
+      .site-header .site-menu { top: 20px; right: 20px; }
+    }
+
+    footer { position: relative; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
+    body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
   </style>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header is-on-image">
     <a class="site-brand" href="index.html" aria-label="JazzClub Films home"><span class="site-brand-text">JAZZCLUB</span><span class="site-brand-films">films</span></a>
     <div class="site-menu">
       <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
@@ -57,10 +97,16 @@
     </div>
   </header>
   <main>
-    <a class="series-link" href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
-    <h1>Episode title to come</h1>
-    <div class="video-placeholder" role="img" aria-label="Video placeholder">VIDEO PLACEHOLDER</div>
-    <p class="episode-description">A brief description of this episode will go here.</p>
+    <section class="episode-hero">
+      <div class="video-placeholder" role="img" aria-label="Video player placeholder"><span class="placeholder-label">VIDEO PLACEHOLDER</span></div>
+      <div class="episode-heading">
+        <a class="series-link" href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
+        <h1>John Gets Married</h1>
+      </div>
+    </section>
+    <section class="episode-details">
+      <p class="episode-description">A brief description of this episode will go here.</p>
+    </section>
   </main>
   <footer>JazzClub Films © 2026</footer>
   <script>
@@ -77,5 +123,32 @@
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setMenuOpen(false); button.focus(); } });
     })();
   </script>
+
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const hero = document.querySelector('.hero, .series-hero, .episode-hero');
+      const updateContrast = () => header.classList.toggle('is-on-image', Boolean(hero && window.scrollY < hero.offsetHeight * .92));
+      let previousY = window.scrollY;
+      updateContrast();
+      if (previousY > 0) header.classList.add('is-visible-on-scroll');
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        updateContrast();
+        if (currentY <= 0) {
+          header.classList.remove('is-hidden', 'is-visible-on-scroll');
+        } else if (currentY < previousY) {
+          header.classList.remove('is-hidden');
+          header.classList.add('is-visible-on-scroll');
+        } else if (currentY > header.offsetHeight) {
+          header.classList.add('is-hidden');
+          header.classList.remove('is-visible-on-scroll');
+        }
+        previousY = currentY;
+      }, { passive: true });
+    })();
+  </script>
+
 </body>
 </html>

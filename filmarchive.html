@@ -8,9 +8,13 @@
   <title>All Shows — JazzClub Films</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { color-scheme: dark; --page-bg: #08090b; --accent: #c3d3dc; --muted: #82909a; --rule: #29343b; }
+    :root { color-scheme: light; --page-bg: #fff; --accent: #516c78; --muted: #69777d; --rule: #d7dde0; }
     html { scroll-behavior: smooth; }
-    body { min-height: 100vh; background: var(--page-bg); color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    body { min-height: 100vh; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
+    body::before { position: fixed; z-index: 0; inset: 0; background: linear-gradient(rgba(6, 8, 9, .38), rgba(6, 8, 9, .48)), var(--active-show-image, none) center / cover no-repeat; content: ''; opacity: 0; pointer-events: none; transition: opacity 1.65s cubic-bezier(.2,.7,.2,1); }
+    body.has-active-show::before { opacity: 1; }
+    body.has-active-show .show-title,
+    body.has-active-show .show-series { color: rgba(255, 255, 255, .88); }
     .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
     .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
     .site-brand-text { display: block; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 900; }
@@ -23,16 +27,23 @@
     .site-menu-links a { display: block; margin-bottom: 14px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; transition: color .3s ease, text-shadow .3s ease; }
     .site-menu-links a:hover { color: var(--accent); text-shadow: 0 0 12px #31516a; }
     .site-menu.is-open .site-menu-links { display: block; }
-    main { width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(230px, 28vh) 0 130px; }
-    .archive-title { margin-bottom: 38px; color: var(--muted); font-size: .68rem; letter-spacing: .18em; }
-    .show-list { list-style: none; border-bottom: 1px solid var(--rule); }
-    .show-row { display: grid; grid-template-columns: 1fr 70px 22px; align-items: baseline; gap: 18px; padding: 28px 0 30px; border-top: 1px solid var(--rule); color: #fff; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
-    .show-row:hover { padding-left: 10px; color: #ddd; }
-    .show-title { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.4rem, 3.2vw, 2.15rem); font-style: italic; }
-    .show-series { display: block; margin-top: 13px; color: #aaa; font-size: .9rem; }
-    .show-year { color: var(--muted); font-size: .75rem; text-align: right; }
-    .show-arrow { color: var(--muted); text-align: right; }
-    footer { padding: 28px 24px 34px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; }
+    main { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(155px, calc(28vh - 2cm)) 0 130px; transition: color .4s ease; }
+    .show-list { list-style: none; }
+    .show-row { display: grid; grid-template-columns: 1fr 22px; align-items: start; gap: 18px; padding: 23px 0 26px; color: #111; text-decoration: none; transform-origin: left center; transition: opacity .85s cubic-bezier(.2,.7,.2,1), color .7s ease; }
+    body.has-active-show .show-row:not(.is-active) { opacity: .68; }
+    body.has-active-show .show-row:not(.is-active) .show-title { font-size: .62rem; }
+    body.has-active-show .show-row:not(.is-active) .show-series { font-size: clamp(1.15rem, 2.3vw, 1.55rem); }
+    .show-title { display: block; color: var(--muted); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; transition: color .7s ease, font-size .8s cubic-bezier(.2,.7,.2,1); }
+    .show-series { display: block; margin-top: 10px; color: #111; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.35rem, 2.8vw, 1.9rem); font-style: italic; transition: color .7s ease, font-size .8s cubic-bezier(.2,.7,.2,1); }
+    .show-row.is-active .show-title { color: rgba(255,255,255,.76); font-size: .82rem; }
+    .show-row.is-active .show-series { color: #fff; font-size: clamp(2rem, 5vw, 3.6rem); }
+    .show-year { display: none; margin-top: 12px; color: rgba(255,255,255,.8); font-size: .7rem; letter-spacing: .16em; text-align: left; transition: opacity .5s ease; opacity: 0; }
+    .show-row.is-active .show-year { display: block; opacity: 1; }
+    .show-arrow { color: var(--muted); text-align: right; transition: color .7s ease; }
+    body.has-active-show .show-arrow { color: rgba(255,255,255,.8); }
+    .show-row:focus-visible { outline: 1px solid rgba(255,255,255,.72); outline-offset: 8px; }
+    footer { position: relative; z-index: 1; padding: 28px 24px 34px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; transition: color .3s ease; }
+    body.has-active-show footer { color: #444; background: #fff; }
     @media (max-width: 600px) {
       .site-header { top: 20px; left: 20px; right: 20px; height: 60px; }
       .site-brand-text { font-size: 1.5rem; }
@@ -40,12 +51,46 @@
       .site-menu { gap: 12px; }
       .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; }
       .site-menu-links { top: 30px; right: 52px; }
-      main { width: calc(100% - 40px); padding-top: 190px; }
-      .archive-title { margin-bottom: 28px; }
-      .show-row { grid-template-columns: 1fr 48px; gap: 10px; padding: 22px 0 24px; }
-      .show-year { grid-column: 1; grid-row: 2; margin-top: 5px; text-align: left; }
-      .show-arrow { grid-column: 2; grid-row: 1 / span 2; }
+      main { width: calc(100% - 40px); padding-top: 115px; }
+      .show-row { grid-template-columns: 1fr 22px; gap: 10px; padding: 19px 0 21px; }
+      .show-row.is-active .show-series { font-size: clamp(1.65rem, 7.4vw, 2.5rem); }
+      .show-arrow { grid-column: 2; grid-row: 1; }
     }
+
+    /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
+    .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
+    .site-header.is-hidden { transform: translateY(-100%); }
+    .site-header.is-visible-on-scroll { background: transparent; box-shadow: none; }
+    .site-header.is-visible-on-scroll::after { position: absolute; right: 40px; bottom: 0; left: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); content: ''; filter: blur(1px); pointer-events: none; }
+    .site-header .site-brand { top: 32px; left: 40px; }
+    .site-header .site-menu { top: 32px; right: 40px; }
+    .site-header .site-brand,
+    .site-header .site-menu-button,
+    .site-header .site-about,
+    .site-header .site-menu-links a { color: #111; text-shadow: none; }
+    .site-header.is-on-image .site-brand,
+    .site-header.is-on-image .site-menu-button,
+    .site-header.is-on-image .site-about,
+    .site-header.is-on-image .site-menu-links a { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+    .site-header.is-visible-on-scroll::after { background: linear-gradient(90deg, transparent, rgba(20, 24, 25, .12) 12%, rgba(20, 24, 25, .18) 50%, rgba(20, 24, 25, .12) 88%, transparent); }
+    .site-header.is-visible-on-scroll.is-on-image::after { background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); }
+    .site-header.is-visible-on-scroll .site-menu-links { padding: 10px 0 2px; background: transparent; }
+    .site-header.is-visible-on-scroll .site-menu-links a:hover,
+    .site-header.is-visible-on-scroll .site-menu-button:hover,
+    .site-header.is-visible-on-scroll .site-about:hover { color: var(--accent, #c3d3dc); text-shadow: none; }
+    .site-header.is-visible-on-scroll .site-menu-button:focus-visible,
+    .site-header.is-visible-on-scroll .site-about:focus-visible,
+    .site-header.is-visible-on-scroll .site-menu-links a:focus-visible { outline-color: var(--accent, #c3d3dc); }
+    @media (max-width: 600px) {
+      .site-header { height: 80px; }
+      .site-header.is-visible-on-scroll::after { right: 20px; left: 20px; }
+      .site-header .site-brand { top: 20px; left: 20px; }
+      .site-header .site-menu { top: 20px; right: 20px; }
+    }
+
+    footer { position: relative; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
+    body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); }
   </style>
 </head>
 <body>
@@ -62,18 +107,61 @@
     </div>
   </header>
   <main>
-    <h1 class="archive-title">ALL SHOWS</h1>
     <ol class="show-list">
       <li>
-        <a class="show-row" href="john-spear-show.html">
-          <span><span class="show-title">The John Spear Show</span><span class="show-series">The Search for Sidequests</span></span>
-          <span class="show-year">2026</span>
+        <a class="show-row" href="search-for-sidequests.html" data-image="search for sidequests.jpg">
+          <span><span class="show-title">The John Spear Show</span><span class="show-series">The Search for Sidequests</span><span class="show-year">2026</span></span>
+          <span class="show-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="show-row" href="john-spear-show.html" data-image="johnindexhero.jpg">
+          <span><span class="show-title">The John Spear Show</span><span class="show-series">More adventures coming soon</span><span class="show-year">SOON</span></span>
+          <span class="show-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="show-row placeholder-row" href="#" data-image="jazzclubfilms.jpg" aria-label="Placeholder show, coming soon">
+          <span><span class="show-title">A future production</span><span class="show-series">Untitled Show</span><span class="show-year">SOON</span></span>
+          <span class="show-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="show-row placeholder-row" href="#" data-image="johnindexhero.jpg" aria-label="Placeholder show, coming soon">
+          <span><span class="show-title">A future production</span><span class="show-series">Untitled Show</span><span class="show-year">SOON</span></span>
           <span class="show-arrow" aria-hidden="true">↗</span>
         </a>
       </li>
     </ol>
   </main>
   <footer>JazzClub Films © 2026</footer>
+  <script>
+    (() => {
+      const rows = [...document.querySelectorAll('.show-row')];
+      const setActive = (row) => {
+        document.body.classList.toggle('has-active-show', Boolean(row));
+        rows.forEach((item) => item.classList.toggle('is-active', item === row));
+        if (row) {
+          document.body.style.setProperty('--active-show-image', `url("${encodeURI(row.dataset.image)}")`);
+          document.querySelector('.site-header').classList.add('is-on-image');
+        } else {
+          document.body.style.removeProperty('--active-show-image');
+          document.querySelector('.site-header').classList.remove('is-on-image');
+        }
+      };
+      rows.forEach((row) => {
+        row.addEventListener('mouseenter', () => setActive(row));
+        row.addEventListener('focus', () => setActive(row));
+        row.addEventListener('mouseleave', () => { if (!row.matches(':focus')) setActive(null); });
+        row.addEventListener('blur', () => setActive(null));
+        if (row.classList.contains('placeholder-row')) row.addEventListener('click', (event) => event.preventDefault());
+      });
+      document.querySelector('.show-list').addEventListener('mouseleave', () => {
+        if (!document.querySelector('.show-row:focus')) setActive(null);
+      });
+    })();
+  </script>
+
   <script>
     (() => {
       const menu = document.querySelector('.site-menu');
@@ -88,5 +176,32 @@
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setMenuOpen(false); button.focus(); } });
     })();
   </script>
+
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const hero = document.querySelector('.hero, .series-hero');
+      const updateContrast = () => header.classList.toggle('is-on-image', document.body.classList.contains('has-active-show') || Boolean(hero && window.scrollY < hero.offsetHeight * .92));
+      let previousY = window.scrollY;
+      updateContrast();
+      if (previousY > 0) header.classList.add('is-visible-on-scroll');
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        updateContrast();
+        if (currentY <= 0) {
+          header.classList.remove('is-hidden', 'is-visible-on-scroll');
+        } else if (currentY < previousY) {
+          header.classList.remove('is-hidden');
+          header.classList.add('is-visible-on-scroll');
+        } else if (currentY > header.offsetHeight) {
+          header.classList.add('is-hidden');
+          header.classList.remove('is-visible-on-scroll');
+        }
+        previousY = currentY;
+      }, { passive: true });
+    })();
+  </script>
+
 </body>
 </html>

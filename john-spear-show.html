@@ -9,9 +9,9 @@
   <style>
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { color-scheme: dark; --page-bg: #0b100f; --accent: #b9cbc0; --muted: #77817c; --rule: #28312e; }
+    :root { color-scheme: light; --page-bg: #fff; --accent: #506956; --muted: #68736c; --rule: #d7ded9; }
     html { scroll-behavior: smooth; }
-    body { min-height: 100vh; background: var(--page-bg); color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    body { min-height: 100vh; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
     .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
     .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
     .site-brand-text { display: block; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 900; }
@@ -29,27 +29,63 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
     .hero { position: relative; min-height: 115svh; padding: 120px 30px 100px; text-align: center; }
-    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('johnindexhero.jpg?v=20260926') center 54% / cover no-repeat; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); }
-    .hero-image::before { position: absolute; inset: -24px 0; background: inherit; content: ''; filter: blur(22px); opacity: .55; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 70%, #000 82%, transparent 100%); }
+    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('johnindexhero.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
+    @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
     .hero-inner { position: absolute; z-index: 1; top: 50svh; right: 30px; left: 30px; transform: translateY(-50%); }
-    .show-title { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(3rem, 8.5vw, 8rem); font-weight: 900; line-height: .98; letter-spacing: 0; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
+    .show-title { color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(3rem, 8.5vw, 8rem); font-weight: 900; line-height: .98; letter-spacing: 0; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
     .show-title span { display: block; }
     .scroll-indicator { position: absolute; z-index: 2; bottom: calc(30svh + 29px); left: 50%; color: #fff; font-size: 1.45rem; line-height: 1; opacity: .28; text-decoration: none; transform: translateX(-50%); animation: arrowPulse 2.7s ease-in-out infinite; transition: filter .35s ease; }
     .scroll-indicator.is-hidden { filter: opacity(0); pointer-events: none; }
     .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: .62; }
     @keyframes arrowPulse { 0%, 100% { opacity: .22; } 50% { opacity: .48; } }
     .series-overview { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: 12px 0 130px; }
-    .series-row { display: grid; grid-template-columns: 1fr 30px; gap: 15px; align-items: baseline; padding: 27px 0 30px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: #fff; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
-    .series-row:hover { padding-left: 10px; color: #ddd; }
-    .series-name { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.35rem, 3vw, 2rem); font-style: italic; }
-    .series-year { display: block; margin-top: 24px; color: var(--muted); font-size: .72rem; letter-spacing: .1em; }
+    .series-row { display: grid; grid-template-columns: 1fr 30px; gap: 15px; align-items: baseline; padding: 27px 0 30px; color: #111; text-align: left; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
+    .series-row:hover { padding-left: 10px; color: #111; }
+    .series-name { display: block; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.35rem, 3vw, 2rem); font-style: italic; }
+    .series-year { display: block; max-height: 0; margin-top: 0; overflow: hidden; color: var(--muted); font-size: .72rem; letter-spacing: .1em; opacity: 0; transition: max-height .4s ease, margin-top .4s ease, opacity .4s ease; }
+    .series-row:hover .series-year, .series-row:focus-visible .series-year { max-height: 1.5em; margin-top: 16px; opacity: 1; }
     .series-arrow { color: var(--muted); text-align: right; }
     @media (max-width: 600px) { .hero { min-height: 115svh; padding: 110px 20px 100px; } .hero-inner { top: 50svh; right: 20px; left: 20px; } .show-title { font-size: clamp(1.7rem, 9vw, 4.5rem); } .series-overview { width: calc(100% - 40px); padding: 12px 0 90px; } .series-row { grid-template-columns: 1fr 22px; gap: 10px; } }
+
+    /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
+    .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
+    .site-header.is-hidden { transform: translateY(-100%); }
+    .site-header.is-visible-on-scroll { background: transparent; box-shadow: none; }
+    .site-header.is-visible-on-scroll::after { position: absolute; right: 40px; bottom: 0; left: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); content: ''; filter: blur(1px); pointer-events: none; }
+    .site-header .site-brand { top: 32px; left: 40px; }
+    .site-header .site-menu { top: 32px; right: 40px; }
+    .site-header .site-brand,
+    .site-header .site-menu-button,
+    .site-header .site-about,
+    .site-header .site-menu-links a { color: #111; text-shadow: none; }
+    .site-header.is-on-image .site-brand,
+    .site-header.is-on-image .site-menu-button,
+    .site-header.is-on-image .site-about,
+    .site-header.is-on-image .site-menu-links a { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+    .site-header.is-visible-on-scroll::after { background: linear-gradient(90deg, transparent, rgba(20, 24, 25, .12) 12%, rgba(20, 24, 25, .18) 50%, rgba(20, 24, 25, .12) 88%, transparent); }
+    .site-header.is-visible-on-scroll.is-on-image::after { background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); }
+    .site-header.is-visible-on-scroll .site-menu-links { padding: 10px 0 2px; background: transparent; }
+    .site-header.is-visible-on-scroll .site-menu-links a:hover,
+    .site-header.is-visible-on-scroll .site-menu-button:hover,
+    .site-header.is-visible-on-scroll .site-about:hover { color: var(--accent, #c3d3dc); text-shadow: none; }
+    .site-header.is-visible-on-scroll .site-menu-button:focus-visible,
+    .site-header.is-visible-on-scroll .site-about:focus-visible,
+    .site-header.is-visible-on-scroll .site-menu-links a:focus-visible { outline-color: var(--accent, #c3d3dc); }
+    @media (max-width: 600px) {
+      .site-header { height: 80px; }
+      .site-header.is-visible-on-scroll::after { right: 20px; left: 20px; }
+      .site-header .site-brand { top: 20px; left: 20px; }
+      .site-header .site-menu { top: 20px; right: 20px; }
+    }
+
+    footer { position: relative; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
+    body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
   </style>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header is-on-image">
     <a class="site-brand" href="index.html" aria-label="JazzClub Films home">
       <span class="site-brand-text">JAZZCLUB</span>
       <span class="site-brand-films">films</span>
@@ -73,7 +109,7 @@
     </section>
     <section class="series-overview" id="series" aria-label="The John Spear Show series">
       <a class="series-row" href="search-for-sidequests.html">
-        <span><span class="series-name">The Search for Sidequests</span><span class="series-year">2026</span></span>
+        <span><span class="series-name">The Search for Sidequests</span><span class="series-year">Season 1 - 2026</span></span>
         <span class="series-arrow" aria-hidden="true">↗</span>
       </a>
     </section>
@@ -97,5 +133,32 @@
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setMenuOpen(false); button.focus(); } });
     })();
 </script>
+
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const hero = document.querySelector('.hero, .series-hero');
+      const updateContrast = () => header.classList.toggle('is-on-image', Boolean(hero && window.scrollY < hero.offsetHeight * .92));
+      let previousY = window.scrollY;
+      updateContrast();
+      if (previousY > 0) header.classList.add('is-visible-on-scroll');
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        updateContrast();
+        if (currentY <= 0) {
+          header.classList.remove('is-hidden', 'is-visible-on-scroll');
+        } else if (currentY < previousY) {
+          header.classList.remove('is-hidden');
+          header.classList.add('is-visible-on-scroll');
+        } else if (currentY > header.offsetHeight) {
+          header.classList.add('is-hidden');
+          header.classList.remove('is-visible-on-scroll');
+        }
+        previousY = currentY;
+      }, { passive: true });
+    })();
+  </script>
+
 </body>
 </html>

@@ -9,9 +9,9 @@
   <style>
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { color-scheme: dark; --page-bg: #0a1116; --accent: #c3d3dc; --muted: #82909a; --rule: #29343b; }
+    :root { color-scheme: light; --page-bg: #fff; --accent: #516c78; --muted: #69777d; --rule: #d7dde0; }
     html { scroll-behavior: smooth; }
-    body { min-height: 100vh; background: var(--page-bg); color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    body { min-height: 100vh; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
     .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
     .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
     .site-brand-text { display: block; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 900; }
@@ -29,33 +29,73 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
     .series-hero { position: relative; min-height: 115svh; padding: 120px 30px 70px; text-align: center; }
-    .series-hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('search for sidequests.jpg?v=20260926') center 54% / cover no-repeat; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); }
-    .series-hero-image::before { position: absolute; inset: -24px 0; background: inherit; content: ''; filter: blur(22px); opacity: .55; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 70%, #000 82%, transparent 100%); }
+    .series-hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('search for sidequests.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
+    @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .series-hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 15, .3); content: ''; }
     .series-hero-inner { position: absolute; z-index: 1; top: 50svh; right: 30px; left: 30px; transform: translateY(-50%); }
     .franchise-title { display: inline-block; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-decoration: none; text-shadow: 0 0 12px rgba(255, 255, 255, .1); transition: color .25s ease; }
     .franchise-title:hover { color: #bbb; }
-    .series-title { max-width: 1100px; margin: 24px auto 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.6rem, 7vw, 6rem); font-style: italic; font-weight: 400; line-height: 1.04; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
-    .hero-year { display: block; margin-top: 34px; color: #aaa; font-size: .7rem; letter-spacing: .18em; }
+    .series-title { color: #fff; max-width: 1100px; margin: 24px auto 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.6rem, 7vw, 6rem); font-style: italic; font-weight: 400; line-height: 1.04; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
+    .hero-year { display: block; margin-top: 34px; color: #fff; font-size: .7rem; letter-spacing: .18em; text-shadow: 0 1px 8px rgba(0, 0, 0, .45); }
     .scroll-indicator { position: absolute; z-index: 2; bottom: calc(30svh + 29px); left: 50%; color: #fff; font-size: 1.45rem; line-height: 1; opacity: .28; text-decoration: none; transform: translateX(-50%); animation: arrowPulse 2.7s ease-in-out infinite; transition: filter .35s ease; }
     .scroll-indicator.is-hidden { filter: opacity(0); pointer-events: none; }
     .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: .62; }
     @keyframes arrowPulse { 0%, 100% { opacity: .22; } 50% { opacity: .48; } }
     .series-content { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: 12px 0 125px; }
     .episode-archive { padding-top: 12px; }
-    .archive-heading { margin-bottom: 18px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .15em; }
-    .episode-list { list-style: none; border-bottom: 1px solid var(--rule); }
-    .episode-row { display: grid; grid-template-columns: 72px 1fr 80px 22px; align-items: baseline; gap: 14px; min-height: 70px; padding: 21px 0 18px; border-top: 1px solid var(--rule); color: #fff; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
-    .episode-row:hover { padding-left: 10px; color: #ddd; }
-    .episode-number { color: var(--muted); font-family: Georgia, 'Times New Roman', serif; font-size: .9rem; }
-    .episode-title { font-size: 1rem; letter-spacing: .015em; }
-    .episode-year { color: var(--muted); font-size: .8rem; text-align: right; }
+    .archive-heading { margin-bottom: 18px; color: #111; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .15em; }
+    .episode-list { display: grid; gap: 8px; list-style: none; }
+    .episode-row { display: grid; grid-template-columns: 1fr 22px; align-items: start; gap: 14px; min-height: 70px; padding: 18px 0; color: #111; text-decoration: none; transition: padding-left .45s ease, color .45s ease, opacity .55s ease; }
+    .episode-title { display: inline-block; font-size: 1rem; letter-spacing: .015em; transition: font-size .55s cubic-bezier(.2,.7,.2,1); }
+    .episode-row:hover, .episode-row:focus-visible { padding-left: 10px; color: #111; }
+    .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: 1.05rem; }
+    .episode-list:has(.episode-row:hover) .episode-row:not(:hover),
+    .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) { opacity: .62; }
+    .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title,
+    .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .95rem; }
+    .episode-teaser { display: block; max-width: 680px; max-height: 0; margin-top: 0; overflow: hidden; color: #454743; font-family: Georgia, 'Times New Roman', serif; font-size: .92rem; line-height: 1.5; opacity: 0; transition: max-height .45s ease, margin-top .45s ease, opacity .45s ease; }
+    .episode-row:hover .episode-teaser, .episode-row:focus-visible .episode-teaser { max-height: 4.5em; margin-top: 9px; opacity: 1; }
     .episode-arrow { color: var(--muted); text-align: right; }
-    @media (max-width: 600px) { .series-hero { min-height: 115svh; padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .hero-year { margin-top: 28px; } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 38px 1fr 48px; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-arrow { display: none; } .episode-year { font-size: .72rem; } }
+    @media (max-width: 600px) { .series-hero { min-height: 115svh; padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .hero-year { margin-top: 28px; } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 1fr; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: .945rem; } .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title, .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .855rem; } .episode-arrow { display: none; } }
+
+    /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
+    .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
+    .site-header.is-hidden { transform: translateY(-100%); }
+    .site-header.is-visible-on-scroll { background: transparent; box-shadow: none; }
+    .site-header.is-visible-on-scroll::after { position: absolute; right: 40px; bottom: 0; left: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); content: ''; filter: blur(1px); pointer-events: none; }
+    .site-header .site-brand { top: 32px; left: 40px; }
+    .site-header .site-menu { top: 32px; right: 40px; }
+    .site-header .site-brand,
+    .site-header .site-menu-button,
+    .site-header .site-about,
+    .site-header .site-menu-links a { color: #111; text-shadow: none; }
+    .site-header.is-on-image .site-brand,
+    .site-header.is-on-image .site-menu-button,
+    .site-header.is-on-image .site-about,
+    .site-header.is-on-image .site-menu-links a { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+    .site-header.is-visible-on-scroll::after { background: linear-gradient(90deg, transparent, rgba(20, 24, 25, .12) 12%, rgba(20, 24, 25, .18) 50%, rgba(20, 24, 25, .12) 88%, transparent); }
+    .site-header.is-visible-on-scroll.is-on-image::after { background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); }
+    .site-header.is-visible-on-scroll .site-menu-links { padding: 10px 0 2px; background: transparent; }
+    .site-header.is-visible-on-scroll .site-menu-links a:hover,
+    .site-header.is-visible-on-scroll .site-menu-button:hover,
+    .site-header.is-visible-on-scroll .site-about:hover { color: var(--accent, #c3d3dc); text-shadow: none; }
+    .site-header.is-visible-on-scroll .site-menu-button:focus-visible,
+    .site-header.is-visible-on-scroll .site-about:focus-visible,
+    .site-header.is-visible-on-scroll .site-menu-links a:focus-visible { outline-color: var(--accent, #c3d3dc); }
+    @media (max-width: 600px) {
+      .site-header { height: 80px; }
+      .site-header.is-visible-on-scroll::after { right: 20px; left: 20px; }
+      .site-header .site-brand { top: 20px; left: 20px; }
+      .site-header .site-menu { top: 20px; right: 20px; }
+    }
+
+    footer { position: relative; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
+    body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
   </style>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header is-on-image">
     <a class="site-brand" href="index.html" aria-label="JazzClub Films home"><span class="site-brand-text">JAZZCLUB</span><span class="site-brand-films">films</span></a>
     <div class="site-menu">
       <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
@@ -77,13 +117,12 @@
       <a class="scroll-indicator" href="#series-content" aria-label="Scroll down to series information and episodes">↓</a>
     </section>
     <div class="series-content" id="series-content">
-      <section class="episode-archive" aria-labelledby="archive-heading">
-        <h2 class="archive-heading" id="archive-heading">EPISODE ARCHIVE</h2>
-        <ol class="episode-list">
-          <li><a class="episode-row" href="episode-01.html"><span class="episode-number">01</span><span class="episode-title">Episode title to come</span><span class="episode-year">2026</span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
-          <li><a class="episode-row" href="episode-02.html"><span class="episode-number">02</span><span class="episode-title">Episode title to come</span><span class="episode-year">2026</span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
-          <li><a class="episode-row" href="episode-03.html"><span class="episode-number">03</span><span class="episode-title">Episode title to come</span><span class="episode-year">2026</span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
-        </ol>
+      <section class="episode-archive" aria-label="Episode archive">
+        <ul class="episode-list">
+          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">John Finds Himself in China</span><span class="episode-teaser">John travels to China in search of what might come next.</span></span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">John Figures Out How to Surf</span><span class="episode-teaser">John takes on the unfamiliar challenge of learning to surf.</span></span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">John Gets Married</span><span class="episode-teaser">John wonders whether marriage could be his next great sidequest.</span></span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
+        </ul>
       </section>
     </div>
   </main>
@@ -106,5 +145,32 @@
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setMenuOpen(false); button.focus(); } });
     })();
 </script>
+
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const hero = document.querySelector('.hero, .series-hero');
+      const updateContrast = () => header.classList.toggle('is-on-image', Boolean(hero && window.scrollY < hero.offsetHeight * .92));
+      let previousY = window.scrollY;
+      updateContrast();
+      if (previousY > 0) header.classList.add('is-visible-on-scroll');
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        updateContrast();
+        if (currentY <= 0) {
+          header.classList.remove('is-hidden', 'is-visible-on-scroll');
+        } else if (currentY < previousY) {
+          header.classList.remove('is-hidden');
+          header.classList.add('is-visible-on-scroll');
+        } else if (currentY > header.offsetHeight) {
+          header.classList.add('is-hidden');
+          header.classList.remove('is-visible-on-scroll');
+        }
+        previousY = currentY;
+      }, { passive: true });
+    })();
+  </script>
+
 </body>
 </html>
