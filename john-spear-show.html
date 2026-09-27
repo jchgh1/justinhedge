@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The John Spear Show — JazzClub Films</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #08090b;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* ---------- NAV ---------- */
+
+    nav {
+      position: fixed;
+      top: 28px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .brand {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular',
+                   'Lucida Grande', 'Lucida Sans Unicode',
+                   Geneva, Verdana, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .menu {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 30px;
+    }
+
+    .hero-inner {
+      width: 100%;
+    }
+
+    .show-title {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular',
+                   'Lucida Grande', 'Lucida Sans Unicode',
+                   Geneva, Verdana, sans-serif;
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin-top: 28px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.1rem, 2.4vw, 2rem);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    /* ---------- SERIES ---------- */
+
+    .series {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px 140px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 40px;
+    }
+
+    .series-link {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      border-top: 1px solid #292b2f;
+      padding: 32px 0 38px;
+      transition: padding-left 0.25s ease;
+    }
+
+    .series-link:last-child {
+      border-bottom: 1px solid #292b2f;
+    }
+
+    .series-link:hover {
+      padding-left: 18px;
+    }
+
+    .series-number {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .series-title {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular',
+                   'Lucida Grande', 'Lucida Sans Unicode',
+                   Geneva, Verdana, sans-serif;
+      font-size: clamp(1.8rem, 4vw, 4rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .series-subtitle {
+      margin-top: 9px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1rem, 1.7vw, 1.35rem);
+      font-style: italic;
+      color: #aaa;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 600px) {
+      nav {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+      }
+
+      .hero {
+        padding: 80px 20px;
+      }
+
+      .series {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 80px;
+      }
+
+      .series-link:hover {
+        padding-left: 0;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="brand">JAZZCLUB FILMS</a>
+    <a href="#" class="menu">MENU</a>
+  </nav>
+
+  <main>
+
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="show-title">THE JOHN SPEAR SHOW</h1>
+    <div class="subtitle">The Search for Sidequests</div>
+  </div>
+</section>
+
+<section class="series">
+
+  <div class="section-label">The John Spear Show</div>
+
+  <a href="sidequests.html" class="series-link">
+    <span class="series-number">01</span>
+    <div class="series-title">THE JOHN SPEAR SHOW</div>
+    <div class="series-subtitle">The Search for Sidequests</div>
+  </a>
+
+</section>
+
+
+  </main>
+
+</body>
+</html>

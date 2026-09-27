@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JazzClub Films</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #08090b;
+      color: #fff;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                   'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      padding: 32px 40px;
+    }
+
+    /* SUBTLE FILM GRAIN */
+    /* HEADER */
+
+    header {
+      position: relative;
+      height: 70px;
+    }
+
+    .logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      color: #fff;
+      line-height: 0.85;
+      text-align: center;
+    }
+
+    .logo-main {
+      display: block;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                   'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .logo-films {
+      display: block;
+      margin-top: 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.8rem;
+      font-style: italic;
+      letter-spacing: 0.35em;
+    }
+
+    /* MENU */
+
+    .menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .menu-button {
+      width: 32px;
+      height: 32px;
+      padding: 7px 4px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-button span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: #fff;
+      transition:
+        background 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+    .menu-button:hover span {
+      background: #fff;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
+    }
+
+    .menu-links {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 42px;
+      width: max-content;
+      text-align: right;
+    }
+
+    .menu-links a {
+      display: block;
+      margin-bottom: 14px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      transition:
+        color 0.3s ease,
+        text-shadow 0.3s ease;
+    }
+
+    .menu-links a:hover {
+      color: #ddd;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+    }
+
+    .menu.open .menu-links {
+      display: block;
+    }
+
+    /* FEATURED FILM */
+
+    .featured {
+      width: min(1100px, 90vw);
+      margin: 12vh auto 0;
+      padding-bottom: 15vh;
+    }
+
+    .featured-label {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                   'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 32px;
+    }
+
+    .featured-film {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      text-decoration: none;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+
+      border: 1px solid #222;
+
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.7);
+
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    /* HAPTIC / PHYSICAL HOVER */
+
+    .featured-film:hover {
+      transform: translateY(-2px);
+
+      border-color: #444;
+
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.35),
+        0 25px 80px rgba(0, 0, 0, 0.8);
+    }
+
+    /* YOUTUBE */
+
+    .youtube-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .youtube-container iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+
+      transition:
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .featured-film:hover .youtube-container iframe {
+      transform: scale(1.015);
+    }
+
+    /* FILM INFORMATION */
+
+    .film-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+
+  background: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.9)
+  );
+
+  opacity: 0;
+  transform: translateY(6px);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+    .featured-film:hover .film-info {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .film-title {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .film-description {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    /* FOOTER */
+
+    footer {
+      width: min(1100px, 90vw);
+      margin: 0 auto;
+      padding-bottom: 32px;
+      text-align: center;
+      color: #444;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 24px;
+      }
+
+      header {
+        height: 60px;
+      }
+
+      .logo-main {
+        font-size: 1.5rem;
+      }
+
+      .logo-films {
+        font-size: 0.7rem;
+        margin-top: 7px;
+      }
+
+      .featured {
+        margin-top: 15vh;
+      }
+
+      .featured-film .film-info {
+        padding: 20px;
+      }
+
+      .film-title {
+        font-size: 1.4rem;
+      }
+
+      .film-description {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <!-- CENTER LOGO -->
+
+    <a href="jazzclubfilms.html" class="logo">
+      <span class="logo-main">JAZZCLUB</span>
+      <span class="logo-films">films</span>
+    </a>
+
+    <!-- RIGHT MENU -->
+
+    <div class="menu">
+
+      <button
+        class="menu-button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="menu-links">
+        <a href="filmarchive.html">ALL FILMS</a>
+        <a href="about.html">ABOUT / CONTACT</a>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <main class="featured">
+
+    <div class="featured-label">
+      FEATURED FILM
+    </div>
+
+    <a href="#" class="featured-film">
+
+      <div class="youtube-container">
+
+        <iframe
+          src="https://www.youtube.com/embed/cfdGdsOI_YU"
+          title="National Geographic: Seasons in the Sea (1990)"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+
+      <div class="film-info">
+
+        <div class="film-title">
+          TBD
+        </div>
+
+        <div class="film-description">
+          JazzClub Films first film is still currently in development. Enjoy this National Geographic documentary until then.
+        </div>
+
+      </div>
+
+    </a>
+
+  </main>
+
+
+  <footer>
+    JazzClub Films © 2026
+  </footer>
+
+
+  <script>
+    const menu = document.querySelector('.menu');
+    const menuButton = document.querySelector('.menu-button');
+
+    menuButton.addEventListener('click', function () {
+      const isOpen = menu.classList.toggle('open');
+
+      menuButton.setAttribute(
+        'aria-expanded',
+        isOpen
+      );
+    });
+  </script>
+
+</body>
+</html>

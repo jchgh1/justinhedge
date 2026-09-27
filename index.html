@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JazzClub Films</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #08090b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 900;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                   'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      letter-spacing: 0;
+      line-height: 0.9;
+    }
+
+.films {
+  display: inline-block;
+  margin-top: 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.45em;
+  margin-left: 0.45em;
+  color: #fff;
+  text-decoration: none;
+
+  animation: bluePulse 5s ease-in-out infinite;
+  transition: all 0.25s ease;
+}
+
+.films:hover {
+  animation: none;
+  color: #071b3d;
+  -webkit-text-stroke: 1px #123d82;
+  text-shadow:
+    0 0 5px #123d82,
+    0 0 12px #0b2b63,
+    0 0 24px #061a3d,
+    0 0 40px #061a3d;
+}
+
+@keyframes bluePulse {
+  0%, 50%, 100% {
+    color: #fff;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+  }
+
+  70%, 85% {
+    color: #071b3d;
+    -webkit-text-stroke: 1px #123d82;
+    text-shadow:
+      0 0 5px #123d82,
+      0 0 12px #0b2b63,
+      0 0 24px #061a3d,
+      0 0 40px #061a3d;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="title">
+    <h1>JAZZCLUB</h1>
+    <a href="films.html" class="films">films</a>
+  </div>
+</body>
+</html>
