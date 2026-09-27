@@ -185,7 +185,7 @@
     @media (max-width: 600px) {
 
       body {
-        padding: 24px;
+        padding: 20px;
       }
 
       header {
@@ -209,37 +209,188 @@
         margin-bottom: 40px;
       }
     }
+
+.site-header {
+  position: relative;
+  height: 70px;
+  width: 100%;
+  margin: 0;
+  z-index: 20;
+}
+
+.site-brand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  line-height: 0.85;
+}
+
+.site-brand-text {
+  display: block;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.site-brand-films {
+  display: block;
+  margin-top: 8px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.35em;
+  text-align: center;
+  width: 100%;
+}
+
+.site-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.site-menu-button,
+.site-about {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.site-menu-button:hover,
+.site-menu-button:focus-visible,
+.site-about:hover {
+  color: #c3d3dc;
+  text-shadow: 0 0 12px #31516a;
+}
+
+.site-menu-button:focus-visible,
+.site-brand:focus-visible,
+.site-menu-links a:focus-visible,
+.site-about:focus-visible {
+  outline: 1px solid #c3d3dc;
+  outline-offset: 5px;
+}
+
+.site-menu-links {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  width: max-content;
+  text-align: right;
+}
+
+.site-menu-links a {
+  display: block;
+  margin-bottom: 14px;
+  color: #fff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.site-menu-links a:hover {
+  color: #c3d3dc;
+  text-shadow: 0 0 12px #31516a;
+}
+
+.site-menu.is-open .site-menu-links {
+  display: block;
+}
+
+.home-page {
+  display: flex;
+  min-height: 100vh;
+  padding: 32px 40px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.home-page .title {
+  margin: auto;
+}
+
+.john-spear-page .site-header {
+  width: auto;
+  margin: 32px 40px 0;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    height: 60px;
+  }
+
+  .site-brand-text {
+    font-size: 1.5rem;
+  }
+
+  .site-brand-films {
+    margin-top: 7px;
+    font-size: 0.7rem;
+  }
+
+  .site-menu {
+    gap: 12px;
+  }
+
+  .site-menu-button,
+  .site-about {
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+  }
+
+  .site-menu-links {
+    top: 30px;
+    right: 0;
+  }
+
+  .home-page {
+    padding: 24px;
+  }
+
+  .john-spear-page .site-header {
+    margin: 20px 20px 0;
+  }
+}
+
   </style>
 </head>
 
 <body>
 
-  <header>
-
-    <!-- CENTER LOGO -->
-
-    <a href="jazzclubfilms.html" class="logo">
-      <span class="logo-main">JAZZCLUB</span>
-      <span class="logo-films">films</span>
-    </a>
-
-    <!-- RIGHT MENU -->
-
-    <div class="menu">
-
-      <button class="menu-button" aria-label="Open menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="menu-links">
-        <a href="films.html">FEATURED FILM</a>
-        <a href="filmarchive.html">ALL FILMS</a>
-      </div>
-
+  <header class="site-header">
+    <a class="site-brand" href="index.html" aria-label="JazzClub Films home"><span class="site-brand-text">JAZZCLUB</span><span class="site-brand-films">films</span></a>
+    <div class="site-menu">
+      <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
+      <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
+        <a href="john-spear-show.html">THE JOHN SPEAR SHOW</a>
+        <a href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
+        <a href="filmarchive.html">ALL SHOWS</a>
+      </nav>
     </div>
-
   </header>
 
 
@@ -276,15 +427,39 @@
   </footer>
 
 
+
   <script>
-    const menu = document.querySelector('.menu');
-    const menuButton = document.querySelector('.menu-button');
+(() => {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
 
-    menuButton.addEventListener('click', function () {
-      const isOpen = menu.classList.toggle('open');
-      menuButton.setAttribute('aria-expanded', isOpen);
-    });
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  header.querySelectorAll('[data-page]').forEach((link) => {
+    if (link.dataset.page === currentPage) link.remove();
+  });
+
+  const menu = header.querySelector('.site-menu');
+  const button = header.querySelector('.site-menu-button');
+  const setMenuOpen = (isOpen) => {
+    menu.classList.toggle('is-open', isOpen);
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-label', isOpen ? 'Close other productions' : 'Open other productions');
+  };
+
+  button.addEventListener('click', () => {
+    setMenuOpen(button.getAttribute('aria-expanded') !== 'true');
+  });
+  document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target)) setMenuOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setMenuOpen(false);
+      button.focus();
+    }
+  });
+})();
+
   </script>
-
 </body>
 </html>

@@ -1,207 +1,100 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The John Spear Show, a series from JazzClub Films.">
   <title>The John Spear Show — JazzClub Films</title>
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
-    body {
-      min-height: 100vh;
-      background: #08090b;
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { color-scheme: dark; --page-bg: #0b100f; --accent: #b9cbc0; --muted: #77817c; --rule: #28312e; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; background: var(--page-bg); color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
+    .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
+    .site-brand-text { display: block; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 900; }
+    .site-brand-films { display: block; width: 100%; margin-top: 8px; font-family: Georgia, 'Times New Roman', serif; font-size: .8rem; font-style: italic; letter-spacing: .35em; text-align: center; }
+    .site-menu { position: absolute; top: 0; right: 0; display: flex; align-items: center; gap: 26px; }
+    .site-menu-button, .site-about { padding: 0; border: 0; background: transparent; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; white-space: nowrap; cursor: pointer; transition: color .3s ease, text-shadow .3s ease; }
+    .site-menu-button:hover, .site-menu-button:focus-visible, .site-about:hover { color: var(--accent); text-shadow: 0 0 12px #3c5b4c; }
+    .site-menu-button:focus-visible, .site-brand:focus-visible, .site-menu-links a:focus-visible, .site-about:focus-visible, a:focus-visible { outline: 1px solid var(--accent); outline-offset: 5px; }
+    .site-menu-links { display: none; position: absolute; top: 36px; right: 65px; width: max-content; text-align: right; }
+    .site-menu-links a { display: block; margin-bottom: 14px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; transition: color .3s ease, text-shadow .3s ease; }
+    .site-menu-links a:hover { color: var(--accent); text-shadow: 0 0 12px #3c5b4c; }
+    .site-menu.is-open .site-menu-links { display: block; }
+    footer { padding: 28px 24px 34px; color: var(--muted); font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; }
+    @media (max-width: 600px) { .site-header { top: 20px; left: 20px; right: 20px; height: 60px; } .site-brand-text { font-size: 1.5rem; } .site-brand-films { margin-top: 7px; font-size: .7rem; } .site-menu { gap: 12px; } .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; } .site-menu-links { top: 30px; right: 52px; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
-    /* ---------- NAV ---------- */
-
-    nav {
-      position: fixed;
-      top: 28px;
-      left: 32px;
-      right: 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .brand {
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Lucida Sans', 'Lucida Sans Regular',
-                   'Lucida Grande', 'Lucida Sans Unicode',
-                   Geneva, Verdana, sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
-
-    .menu {
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* ---------- HERO ---------- */
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 30px;
-    }
-
-    .hero-inner {
-      width: 100%;
-    }
-
-    .show-title {
-      font-family: 'Lucida Sans', 'Lucida Sans Regular',
-                   'Lucida Grande', 'Lucida Sans Unicode',
-                   Geneva, Verdana, sans-serif;
-      font-size: clamp(3rem, 8vw, 8rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-    }
-
-    .subtitle {
-      margin-top: 28px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.1rem, 2.4vw, 2rem);
-      font-style: italic;
-      font-weight: 400;
-      color: #fff;
-    }
-
-    /* ---------- SERIES ---------- */
-
-    .series {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px 140px;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #777;
-      margin-bottom: 40px;
-    }
-
-    .series-link {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      border-top: 1px solid #292b2f;
-      padding: 32px 0 38px;
-      transition: padding-left 0.25s ease;
-    }
-
-    .series-link:last-child {
-      border-bottom: 1px solid #292b2f;
-    }
-
-    .series-link:hover {
-      padding-left: 18px;
-    }
-
-    .series-number {
-      display: block;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 0.9rem;
-      color: #777;
-      margin-bottom: 10px;
-    }
-
-    .series-title {
-      font-family: 'Lucida Sans', 'Lucida Sans Regular',
-                   'Lucida Grande', 'Lucida Sans Unicode',
-                   Geneva, Verdana, sans-serif;
-      font-size: clamp(1.8rem, 4vw, 4rem);
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .series-subtitle {
-      margin-top: 9px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1rem, 1.7vw, 1.35rem);
-      font-style: italic;
-      color: #aaa;
-    }
-
-    /* ---------- MOBILE ---------- */
-
-    @media (max-width: 600px) {
-      nav {
-        top: 20px;
-        left: 20px;
-        right: 20px;
-      }
-
-      .hero {
-        padding: 80px 20px;
-      }
-
-      .series {
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 80px;
-      }
-
-      .series-link:hover {
-        padding-left: 0;
-      }
-    }
+    .hero { position: relative; min-height: 115svh; padding: 120px 30px 100px; text-align: center; }
+    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('johnindexhero.jpg?v=20260926') center 54% / cover no-repeat; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); }
+    .hero-image::before { position: absolute; inset: -24px 0; background: inherit; content: ''; filter: blur(22px); opacity: .55; -webkit-mask-image: linear-gradient(to bottom, transparent 70%, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 70%, #000 82%, transparent 100%); }
+    .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
+    .hero-inner { position: absolute; z-index: 1; top: 50svh; right: 30px; left: 30px; transform: translateY(-50%); }
+    .show-title { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(3rem, 8.5vw, 8rem); font-weight: 900; line-height: .98; letter-spacing: 0; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
+    .show-title span { display: block; }
+    .scroll-indicator { position: absolute; z-index: 2; bottom: calc(30svh + 29px); left: 50%; color: #fff; font-size: 1.45rem; line-height: 1; opacity: .28; text-decoration: none; transform: translateX(-50%); animation: arrowPulse 2.7s ease-in-out infinite; transition: filter .35s ease; }
+    .scroll-indicator.is-hidden { filter: opacity(0); pointer-events: none; }
+    .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: .62; }
+    @keyframes arrowPulse { 0%, 100% { opacity: .22; } 50% { opacity: .48; } }
+    .series-overview { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: 12px 0 130px; }
+    .series-row { display: grid; grid-template-columns: 1fr 30px; gap: 15px; align-items: baseline; padding: 27px 0 30px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: #fff; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
+    .series-row:hover { padding-left: 10px; color: #ddd; }
+    .series-name { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.35rem, 3vw, 2rem); font-style: italic; }
+    .series-year { display: block; margin-top: 24px; color: var(--muted); font-size: .72rem; letter-spacing: .1em; }
+    .series-arrow { color: var(--muted); text-align: right; }
+    @media (max-width: 600px) { .hero { min-height: 115svh; padding: 110px 20px 100px; } .hero-inner { top: 50svh; right: 20px; left: 20px; } .show-title { font-size: clamp(1.7rem, 9vw, 4.5rem); } .series-overview { width: calc(100% - 40px); padding: 12px 0 90px; } .series-row { grid-template-columns: 1fr 22px; gap: 10px; } }
   </style>
-
 </head>
-
 <body>
-
-  <nav>
-    <a href="index.html" class="brand">JAZZCLUB FILMS</a>
-    <a href="#" class="menu">MENU</a>
-  </nav>
-
+  <header class="site-header">
+    <a class="site-brand" href="index.html" aria-label="JazzClub Films home">
+      <span class="site-brand-text">JAZZCLUB</span>
+      <span class="site-brand-films">films</span>
+    </a>
+    <div class="site-menu">
+      <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
+      <a class="site-about" href="about.html">ABOUT</a>
+      <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
+        <a href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
+        <a href="filmarchive.html">ALL SHOWS</a>
+      </nav>
+    </div>
+  </header>
   <main>
-
-
-<section class="hero">
-  <div class="hero-inner">
-    <h1 class="show-title">THE JOHN SPEAR SHOW</h1>
-    <div class="subtitle">The Search for Sidequests</div>
-  </div>
-</section>
-
-<section class="series">
-
-  <div class="section-label">The John Spear Show</div>
-
-  <a href="sidequests.html" class="series-link">
-    <span class="series-number">01</span>
-    <div class="series-title">THE JOHN SPEAR SHOW</div>
-    <div class="series-subtitle">The Search for Sidequests</div>
-  </a>
-
-</section>
-
-
+    <section class="hero" aria-labelledby="show-title">
+      <div class="hero-image" role="img" aria-label="Open ocean and waves"></div>
+      <div class="hero-inner">
+        <h1 class="show-title" id="show-title"><span>THE JOHN SPEAR</span><span>SHOW</span></h1>
+      </div>
+      <a class="scroll-indicator" href="#series" aria-label="Scroll down to series">↓</a>
+    </section>
+    <section class="series-overview" id="series" aria-label="The John Spear Show series">
+      <a class="series-row" href="search-for-sidequests.html">
+        <span><span class="series-name">The Search for Sidequests</span><span class="series-year">2026</span></span>
+        <span class="series-arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
   </main>
-
+  <footer>JazzClub Films © 2026</footer>
+  <script>
+    (() => {
+      const menu = document.querySelector('.site-menu');
+      const button = document.querySelector('.site-menu-button');
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      const updateScrollIndicator = () => scrollIndicator.classList.toggle('is-hidden', window.scrollY > 0);
+      updateScrollIndicator();
+      window.addEventListener('scroll', updateScrollIndicator, { passive: true });
+      const setMenuOpen = (isOpen) => {
+        menu.classList.toggle('is-open', isOpen);
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.setAttribute('aria-label', isOpen ? 'Close other productions' : 'Open other productions');
+      };
+      button.addEventListener('click', () => setMenuOpen(button.getAttribute('aria-expanded') !== 'true'));
+      document.addEventListener('click', (event) => { if (!menu.contains(event.target)) setMenuOpen(false); });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setMenuOpen(false); button.focus(); } });
+    })();
+</script>
 </body>
 </html>

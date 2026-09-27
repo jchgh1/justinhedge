@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The JazzClub Films show archive.">
-  <title>All Shows — JazzClub Films</title>
+  <meta name="description" content="An episode of The Search for Sidequests from The John Spear Show.">
+  <title>Episode — The Search for Sidequests</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root { color-scheme: dark; --page-bg: #08090b; --accent: #c3d3dc; --muted: #82909a; --rule: #29343b; }
-    html { scroll-behavior: smooth; }
     body { min-height: 100vh; background: var(--page-bg); color: #fff; font-family: Arial, Helvetica, sans-serif; }
     .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
     .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
@@ -22,15 +21,12 @@
     .site-menu-links a { display: block; margin-bottom: 14px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; transition: color .3s ease, text-shadow .3s ease; }
     .site-menu-links a:hover { color: var(--accent); text-shadow: 0 0 12px #31516a; }
     .site-menu.is-open .site-menu-links { display: block; }
-    main { width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(230px, 28vh) 0 130px; }
-    .archive-title { margin-bottom: 38px; color: var(--muted); font-size: .68rem; letter-spacing: .18em; }
-    .show-list { list-style: none; border-bottom: 1px solid var(--rule); }
-    .show-row { display: grid; grid-template-columns: 1fr 70px 22px; align-items: baseline; gap: 18px; padding: 28px 0 30px; border-top: 1px solid var(--rule); color: #fff; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
-    .show-row:hover { padding-left: 10px; color: #ddd; }
-    .show-title { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.4rem, 3.2vw, 2.15rem); font-style: italic; }
-    .show-series { display: block; margin-top: 13px; color: #aaa; font-size: .9rem; }
-    .show-year { color: var(--muted); font-size: .75rem; text-align: right; }
-    .show-arrow { color: var(--muted); text-align: right; }
+    main { width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(172px, calc(25vh - 48px)) 0 110px; }
+    .series-link { display: inline-block; color: var(--muted); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-decoration: none; transition: color .25s ease; }
+    .series-link:hover { color: var(--accent); }
+    h1 { max-width: 1000px; margin-top: 18px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(2.7rem, 7vw, 6rem); font-weight: 900; line-height: 1.02; letter-spacing: 0; }
+    .video-placeholder { display: grid; aspect-ratio: 16 / 9; margin-top: 58px; place-items: center; border: 1px solid var(--rule); background: #101519; color: var(--muted); font-size: .65rem; letter-spacing: .16em; }
+    .episode-description { max-width: 680px; margin-top: 28px; color: #b5c0c5; font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.7; }
     footer { padding: 28px 24px 34px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; }
     @media (max-width: 600px) {
       .site-header { top: 20px; left: 20px; right: 20px; height: 60px; }
@@ -39,11 +35,10 @@
       .site-menu { gap: 12px; }
       .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; }
       .site-menu-links { top: 30px; right: 52px; }
-      main { width: calc(100% - 40px); padding-top: 190px; }
-      .archive-title { margin-bottom: 28px; }
-      .show-row { grid-template-columns: 1fr 48px; gap: 10px; padding: 22px 0 24px; }
-      .show-year { grid-column: 1; grid-row: 2; margin-top: 5px; text-align: left; }
-      .show-arrow { grid-column: 2; grid-row: 1 / span 2; }
+      main { width: calc(100% - 40px); padding-top: 117px; }
+      h1 { margin-top: 15px; font-size: clamp(2.25rem, 10vw, 4rem); }
+      .video-placeholder { margin-top: 38px; }
+      .episode-description { margin-top: 22px; font-size: 1rem; }
     }
   </style>
 </head>
@@ -61,16 +56,10 @@
     </div>
   </header>
   <main>
-    <h1 class="archive-title">ALL SHOWS</h1>
-    <ol class="show-list">
-      <li>
-        <a class="show-row" href="john-spear-show.html">
-          <span><span class="show-title">The John Spear Show</span><span class="show-series">The Search for Sidequests</span></span>
-          <span class="show-year">2026</span>
-          <span class="show-arrow" aria-hidden="true">↗</span>
-        </a>
-      </li>
-    </ol>
+    <a class="series-link" href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
+    <h1>Episode title to come</h1>
+    <div class="video-placeholder" role="img" aria-label="Video placeholder">VIDEO PLACEHOLDER</div>
+    <p class="episode-description">A brief description of this episode will go here.</p>
   </main>
   <footer>JazzClub Films © 2026</footer>
   <script>
