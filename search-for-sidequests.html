@@ -36,8 +36,7 @@
     .franchise-title { display: inline-block; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-decoration: none; text-shadow: 0 0 12px rgba(255, 255, 255, .1); transition: color .25s ease; }
     .franchise-title:hover { color: #bbb; }
     .series-title { color: #fff; max-width: 1100px; margin: 24px auto 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.6rem, 7vw, 6rem); font-style: italic; font-weight: 400; line-height: 1.04; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
-    .hero-year { display: block; margin-top: 34px; color: #fff; font-size: .7rem; letter-spacing: .18em; text-shadow: 0 1px 8px rgba(0, 0, 0, .45); }
-    .scroll-indicator { position: absolute; z-index: 2; bottom: calc(30svh + 29px); left: 50%; color: #fff; font-size: 1.45rem; line-height: 1; opacity: .28; text-decoration: none; transform: translateX(-50%); animation: arrowPulse 2.7s ease-in-out infinite; transition: filter .35s ease; }
+    .scroll-indicator { position: absolute; z-index: 2; bottom: 12svh; left: 50%; color: #fff; font-size: 1.45rem; line-height: 1; opacity: .28; text-decoration: none; transform: translateX(-50%); animation: arrowPulse 2.7s ease-in-out infinite; transition: filter .35s ease; }
     .scroll-indicator.is-hidden { filter: opacity(0); pointer-events: none; }
     .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: .62; }
     @keyframes arrowPulse { 0%, 100% { opacity: .22; } 50% { opacity: .48; } }
@@ -45,7 +44,7 @@
     .episode-archive { padding-top: 12px; }
     .archive-heading { margin-bottom: 18px; color: #111; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .15em; }
     .episode-list { display: grid; gap: 8px; list-style: none; }
-    .episode-row { display: grid; grid-template-columns: 1fr 22px; align-items: start; gap: 14px; min-height: 70px; padding: 18px 0; color: #111; text-decoration: none; transition: padding-left .45s ease, color .45s ease, opacity .55s ease; }
+    .episode-row { display: grid; grid-template-columns: 1fr; align-items: start; gap: 14px; min-height: 70px; padding: 18px 0; color: #111; text-decoration: none; transition: padding-left .45s ease, color .45s ease, opacity .55s ease; }
     .episode-title { display: inline-block; font-size: 1rem; letter-spacing: .015em; transition: font-size .55s cubic-bezier(.2,.7,.2,1); }
     .episode-row:hover, .episode-row:focus-visible { padding-left: 10px; color: #111; }
     .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: 1.05rem; }
@@ -55,8 +54,7 @@
     .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .95rem; }
     .episode-teaser { display: block; max-width: 680px; max-height: 0; margin-top: 0; overflow: hidden; color: #454743; font-family: Georgia, 'Times New Roman', serif; font-size: .92rem; line-height: 1.5; opacity: 0; transition: max-height .45s ease, margin-top .45s ease, opacity .45s ease; }
     .episode-row:hover .episode-teaser, .episode-row:focus-visible .episode-teaser { max-height: 4.5em; margin-top: 9px; opacity: 1; }
-    .episode-arrow { color: var(--muted); text-align: right; }
-    @media (max-width: 600px) { .series-hero { min-height: calc(115svh - 2cm); padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .hero-year { margin-top: 28px; } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 1fr; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: .945rem; } .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title, .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .855rem; } .episode-arrow { display: none; } }
+    @media (max-width: 600px) { .series-hero { min-height: calc(115svh - 2cm); padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 1fr; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: .945rem; } .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title, .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .855rem; } }
 
     /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
     .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
@@ -113,16 +111,15 @@
       <div class="series-hero-inner">
         <a class="franchise-title" href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
         <h1 class="series-title" id="series-title">The Search for Sidequests</h1>
-        <span class="hero-year">2026</span>
       </div>
       <a class="scroll-indicator" href="#series-content" aria-label="Scroll down to series information and episodes">↓︎</a>
     </section>
     <div class="series-content" id="series-content">
       <section class="episode-archive" aria-label="Episode archive">
         <ul class="episode-list">
-          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">Justin Finds Himself in China</span><span class="episode-teaser">Justin travels to China in search of what might come next.</span></span><span class="episode-arrow" aria-hidden="true">↗︎</span></a></li>
-          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">Justin Figures Out How to Surf</span><span class="episode-teaser">Justin takes on the unfamiliar challenge of learning to surf.</span></span><span class="episode-arrow" aria-hidden="true">↗︎</span></a></li>
-          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">Justin Gets Married</span><span class="episode-teaser">Justin wonders whether marriage could be his next great sidequest.</span></span><span class="episode-arrow" aria-hidden="true">↗︎</span></a></li>
+          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">Justin Finds Himself in China</span><span class="episode-teaser">Justin travels to China in search of what might come next.</span></span></a></li>
+          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">Justin Figures Out How to Surf</span><span class="episode-teaser">Justin takes on the unfamiliar challenge of learning to surf.</span></span></a></li>
+          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">Justin Gets Married</span><span class="episode-teaser">Justin wonders whether marriage could be his next great sidequest.</span></span></a></li>
         </ul>
       </section>
     </div>

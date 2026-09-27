@@ -29,7 +29,7 @@
     .site-menu.is-open .site-menu-links { display: block; }
     main { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(155px, calc(28vh - 2cm)) 0 130px; transition: color .4s ease; }
     .show-list { list-style: none; }
-    .show-row { display: grid; grid-template-columns: 1fr 22px; align-items: start; gap: 18px; padding: 23px 0 26px; color: #111; text-decoration: none; transform-origin: left center; transition: opacity .85s cubic-bezier(.2,.7,.2,1), color .7s ease; }
+    .show-row { display: grid; grid-template-columns: 1fr; align-items: start; gap: 18px; padding: 23px 0 26px; color: #111; text-decoration: none; transform-origin: left center; transition: opacity .85s cubic-bezier(.2,.7,.2,1), color .7s ease; }
     body.has-active-show .show-row:not(.is-active) { opacity: .68; }
     body.has-active-show .show-row:not(.is-active) .show-title { font-size: .62rem; }
     body.has-active-show .show-row:not(.is-active) .show-series { font-size: clamp(1.15rem, 2.3vw, 1.55rem); }
@@ -39,8 +39,7 @@
     .show-row.is-active .show-series { color: #fff; font-size: clamp(2rem, 5vw, 3.6rem); }
     .show-year { display: none; margin-top: 12px; color: rgba(255,255,255,.8); font-size: .7rem; letter-spacing: .16em; text-align: left; transition: opacity .5s ease; opacity: 0; }
     .show-row.is-active .show-year { display: block; opacity: 1; }
-    .show-arrow { color: var(--muted); text-align: right; transition: color .7s ease; }
-    body.has-active-show .show-arrow { color: rgba(255,255,255,.8); }
+    body.has-active-show
     .show-row:focus-visible { outline: 1px solid rgba(255,255,255,.72); outline-offset: 8px; }
     footer { position: relative; z-index: 1; padding: 28px 24px 34px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; transition: color .3s ease; }
     body.has-active-show footer { color: #444; background: #fff; }
@@ -52,9 +51,8 @@
       .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; }
       .site-menu-links { top: 30px; right: 52px; }
       main { width: calc(100% - 40px); padding-top: 115px; }
-      .show-row { grid-template-columns: 1fr 22px; gap: 10px; padding: 19px 0 21px; }
+      .show-row { grid-template-columns: 1fr; gap: 10px; padding: 19px 0 21px; }
       .show-row.is-active .show-series { font-size: clamp(1.65rem, 7.4vw, 2.5rem); }
-      .show-arrow { grid-column: 2; grid-row: 1; }
     }
 
     /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
@@ -112,25 +110,21 @@
       <li>
         <a class="show-row" href="search-for-sidequests.html" data-image="search for sidequests.jpg">
           <span><span class="show-title">The Justin Hedge Show</span><span class="show-series">The Search for Sidequests</span><span class="show-year">2026</span></span>
-          <span class="show-arrow" aria-hidden="true">↗︎</span>
         </a>
       </li>
       <li>
         <a class="show-row" href="justin-hedge-show.html" data-image="justinhedgehero.jpg">
           <span><span class="show-title">The Justin Hedge Show</span><span class="show-series">More adventures coming soon</span><span class="show-year">SOON</span></span>
-          <span class="show-arrow" aria-hidden="true">↗︎</span>
         </a>
       </li>
       <li>
         <a class="show-row placeholder-row" href="#" data-image="jazzclubfilms.jpg" aria-label="Placeholder show, coming soon">
           <span><span class="show-title">A future production</span><span class="show-series">Untitled Show</span><span class="show-year">SOON</span></span>
-          <span class="show-arrow" aria-hidden="true">↗︎</span>
         </a>
       </li>
       <li>
         <a class="show-row placeholder-row" href="#" data-image="justinhedgehero.jpg" aria-label="Placeholder show, coming soon">
           <span><span class="show-title">A future production</span><span class="show-series">Untitled Show</span><span class="show-year">SOON</span></span>
-          <span class="show-arrow" aria-hidden="true">↗︎</span>
         </a>
       </li>
     </ol>
