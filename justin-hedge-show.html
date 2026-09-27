@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico?v=20260926" type="image/x-icon">
-  <meta name="description" content="The John Spear Show, a series from JazzClub Films.">
-  <title>The John Spear Show — JazzClub Films</title>
+  <meta name="description" content="The Justin Hedge Show, a series from JazzClub Films.">
+  <title>The Justin Hedge Show — JazzClub Films</title>
   <style>
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,7 +29,7 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
     .hero { position: relative; min-height: 115svh; padding: 120px 30px 100px; text-align: center; }
-    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('johnindexhero.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
+    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('justinhedgehero.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
     @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
     .hero-inner { position: absolute; z-index: 1; top: 50svh; right: 30px; left: 30px; transform: translateY(-50%); }
@@ -79,7 +79,8 @@
       .site-header .site-menu { top: 20px; right: 20px; }
     }
 
-    footer { position: relative; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    .footer-heron { display: block; flex: 0 0 auto; width: 34px; height: 24px; margin: 0; color: #252a26; }
+    footer { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding-top: 28px; color: #444; background: #fff; }
     footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
     body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
   </style>
@@ -103,18 +104,32 @@
     <section class="hero" aria-labelledby="show-title">
       <div class="hero-image" role="img" aria-label="Open ocean and waves"></div>
       <div class="hero-inner">
-        <h1 class="show-title" id="show-title"><span>THE JOHN SPEAR</span><span>SHOW</span></h1>
+        <h1 class="show-title" id="show-title"><span>THE JUSTIN HEDGE</span><span>SHOW</span></h1>
       </div>
       <a class="scroll-indicator" href="#series" aria-label="Scroll down to series">↓</a>
     </section>
-    <section class="series-overview" id="series" aria-label="The John Spear Show series">
+    <section class="series-overview" id="series" aria-label="The Justin Hedge Show series">
       <a class="series-row" href="search-for-sidequests.html">
         <span><span class="series-name">The Search for Sidequests</span><span class="series-year">Season 1 - 2026</span></span>
         <span class="series-arrow" aria-hidden="true">↗</span>
       </a>
     </section>
   </main>
-  <footer>JazzClub Films © 2026</footer>
+  <footer><svg class="footer-heron" width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heron">
+      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M330 358 L326 415"/>
+        <path d="M326 415 L318 428 M326 415 L326 430 M326 415 L334 428"/>
+        <path d="M355 356 L352 410"/>
+        <path d="M352 410 L344 423 M352 410 L352 425 M352 410 L360 423"/>
+        <path d="M235 315 Q270 245 340 240 Q400 235 415 275 Q422 315 395 340 Q335 362 270 340 L235 315 Z"/>
+        <path d="M340 240 Q315 180 340 140 Q360 105 410 100 Q455 98 465 140 Q472 185 450 220 Q432 250 458 285 Q478 315 472 345"/>
+        <ellipse cx="480" cy="350" rx="22" ry="17"/>
+        <path d="M500 348 Q528 345 542 355 Q528 358 500 358"/>
+        <circle cx="488" cy="345" r="2" fill="currentColor" stroke="none"/>
+        <path d="M345 255 Q300 270 292 305 Q305 328 348 318"/>
+      </g>
+    </svg>
+    JazzClub Films © 2026</footer>
   <script>
     (() => {
       const menu = document.querySelector('.site-menu');

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico?v=20260926" type="image/x-icon">
-  <meta name="description" content="An episode of The Search for Sidequests from The John Spear Show.">
+  <meta name="description" content="An episode of The Search for Sidequests from The Justin Hedge Show.">
   <title>Episode — The Search for Sidequests</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,7 +78,8 @@
       .site-header .site-menu { top: 20px; right: 20px; }
     }
 
-    footer { position: relative; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    .footer-heron { display: block; flex: 0 0 auto; width: 34px; height: 24px; margin: 0; color: #252a26; }
+    footer { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding-top: 28px; color: #444; background: #fff; }
     footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
     body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
   </style>
@@ -90,7 +91,7 @@
       <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
       <a class="site-about" href="about.html">ABOUT</a>
       <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
-        <a href="john-spear-show.html">THE JOHN SPEAR SHOW</a>
+        <a href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
         <a href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
         <a href="filmarchive.html">ALL SHOWS</a>
       </nav>
@@ -101,14 +102,28 @@
       <div class="video-placeholder" role="img" aria-label="Video player placeholder"><span class="placeholder-label">VIDEO PLACEHOLDER</span></div>
       <div class="episode-heading">
         <a class="series-link" href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
-        <h1>John Finds Himself in China</h1>
+        <h1>Justin Finds Himself in China</h1>
       </div>
     </section>
     <section class="episode-details">
       <p class="episode-description">A brief description of this episode will go here.</p>
     </section>
   </main>
-  <footer>JazzClub Films © 2026</footer>
+  <footer><svg class="footer-heron" width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heron">
+      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M330 358 L326 415"/>
+        <path d="M326 415 L318 428 M326 415 L326 430 M326 415 L334 428"/>
+        <path d="M355 356 L352 410"/>
+        <path d="M352 410 L344 423 M352 410 L352 425 M352 410 L360 423"/>
+        <path d="M235 315 Q270 245 340 240 Q400 235 415 275 Q422 315 395 340 Q335 362 270 340 L235 315 Z"/>
+        <path d="M340 240 Q315 180 340 140 Q360 105 410 100 Q455 98 465 140 Q472 185 450 220 Q432 250 458 285 Q478 315 472 345"/>
+        <ellipse cx="480" cy="350" rx="22" ry="17"/>
+        <path d="M500 348 Q528 345 542 355 Q528 358 500 358"/>
+        <circle cx="488" cy="345" r="2" fill="currentColor" stroke="none"/>
+        <path d="M345 255 Q300 270 292 305 Q305 328 348 318"/>
+      </g>
+    </svg>
+    JazzClub Films © 2026</footer>
   <script>
     (() => {
       const menu = document.querySelector('.site-menu');
