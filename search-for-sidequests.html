@@ -28,7 +28,7 @@
     @media (max-width: 600px) { .site-header { top: 20px; left: 20px; right: 20px; height: 60px; } .site-brand-text { font-size: 1.5rem; } .site-brand-films { margin-top: 7px; font-size: .7rem; } .site-menu { gap: 12px; } .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; } .site-menu-links { top: 30px; right: 52px; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
-    .series-hero { position: relative; min-height: 115svh; padding: 120px 30px 70px; text-align: center; }
+    .series-hero { position: relative; min-height: calc(115svh - 2cm); padding: 120px 30px 70px; text-align: center; }
     .series-hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('search for sidequests.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
     @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .series-hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 15, .3); content: ''; }
@@ -56,7 +56,7 @@
     .episode-teaser { display: block; max-width: 680px; max-height: 0; margin-top: 0; overflow: hidden; color: #454743; font-family: Georgia, 'Times New Roman', serif; font-size: .92rem; line-height: 1.5; opacity: 0; transition: max-height .45s ease, margin-top .45s ease, opacity .45s ease; }
     .episode-row:hover .episode-teaser, .episode-row:focus-visible .episode-teaser { max-height: 4.5em; margin-top: 9px; opacity: 1; }
     .episode-arrow { color: var(--muted); text-align: right; }
-    @media (max-width: 600px) { .series-hero { min-height: 115svh; padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .hero-year { margin-top: 28px; } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 1fr; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: .945rem; } .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title, .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .855rem; } .episode-arrow { display: none; } }
+    @media (max-width: 600px) { .series-hero { min-height: calc(115svh - 2cm); padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .hero-year { margin-top: 28px; } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 1fr; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: .945rem; } .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title, .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .855rem; } .episode-arrow { display: none; } }
 
     /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
     .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
@@ -115,14 +115,14 @@
         <h1 class="series-title" id="series-title">The Search for Sidequests</h1>
         <span class="hero-year">2026</span>
       </div>
-      <a class="scroll-indicator" href="#series-content" aria-label="Scroll down to series information and episodes">↓</a>
+      <a class="scroll-indicator" href="#series-content" aria-label="Scroll down to series information and episodes">↓︎</a>
     </section>
     <div class="series-content" id="series-content">
       <section class="episode-archive" aria-label="Episode archive">
         <ul class="episode-list">
-          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">Justin Finds Himself in China</span><span class="episode-teaser">Justin travels to China in search of what might come next.</span></span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
-          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">Justin Figures Out How to Surf</span><span class="episode-teaser">Justin takes on the unfamiliar challenge of learning to surf.</span></span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
-          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">Justin Gets Married</span><span class="episode-teaser">Justin wonders whether marriage could be his next great sidequest.</span></span><span class="episode-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">Justin Finds Himself in China</span><span class="episode-teaser">Justin travels to China in search of what might come next.</span></span><span class="episode-arrow" aria-hidden="true">↗︎</span></a></li>
+          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">Justin Figures Out How to Surf</span><span class="episode-teaser">Justin takes on the unfamiliar challenge of learning to surf.</span></span><span class="episode-arrow" aria-hidden="true">↗︎</span></a></li>
+          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">Justin Gets Married</span><span class="episode-teaser">Justin wonders whether marriage could be his next great sidequest.</span></span><span class="episode-arrow" aria-hidden="true">↗︎</span></a></li>
         </ul>
       </section>
     </div>

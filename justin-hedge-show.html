@@ -28,7 +28,7 @@
     @media (max-width: 600px) { .site-header { top: 20px; left: 20px; right: 20px; height: 60px; } .site-brand-text { font-size: 1.5rem; } .site-brand-films { margin-top: 7px; font-size: .7rem; } .site-menu { gap: 12px; } .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; } .site-menu-links { top: 30px; right: 52px; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
-    .hero { position: relative; min-height: 115svh; padding: 120px 30px 100px; text-align: center; }
+    .hero { position: relative; min-height: calc(115svh - 2cm); padding: 120px 30px 100px; text-align: center; }
     .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('justinhedgehero.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
     @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
@@ -46,7 +46,7 @@
     .series-year { display: block; max-height: 0; margin-top: 0; overflow: hidden; color: var(--muted); font-size: .72rem; letter-spacing: .1em; opacity: 0; transition: max-height .4s ease, margin-top .4s ease, opacity .4s ease; }
     .series-row:hover .series-year, .series-row:focus-visible .series-year { max-height: 1.5em; margin-top: 16px; opacity: 1; }
     .series-arrow { color: var(--muted); text-align: right; }
-    @media (max-width: 600px) { .hero { min-height: 115svh; padding: 110px 20px 100px; } .hero-inner { top: 50svh; right: 20px; left: 20px; } .show-title { font-size: clamp(1.7rem, 9vw, 4.5rem); } .series-overview { width: calc(100% - 40px); padding: 12px 0 90px; } .series-row { grid-template-columns: 1fr 22px; gap: 10px; } }
+    @media (max-width: 600px) { .hero { min-height: calc(115svh - 2cm); padding: 110px 20px 100px; } .hero-inner { top: 50svh; right: 20px; left: 20px; } .show-title { font-size: clamp(1.7rem, 9vw, 4.5rem); } .series-overview { width: calc(100% - 40px); padding: 12px 0 90px; } .series-row { grid-template-columns: 1fr 22px; gap: 10px; } }
 
     /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
     .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
@@ -106,12 +106,12 @@
       <div class="hero-inner">
         <h1 class="show-title" id="show-title"><span>THE JUSTIN HEDGE</span><span>SHOW</span></h1>
       </div>
-      <a class="scroll-indicator" href="#series" aria-label="Scroll down to series">↓</a>
+      <a class="scroll-indicator" href="#series" aria-label="Scroll down to series">↓︎</a>
     </section>
     <section class="series-overview" id="series" aria-label="The Justin Hedge Show series">
       <a class="series-row" href="search-for-sidequests.html">
         <span><span class="series-name">The Search for Sidequests</span><span class="series-year">Season 1 - 2026</span></span>
-        <span class="series-arrow" aria-hidden="true">↗</span>
+        <span class="series-arrow" aria-hidden="true">↗︎</span>
       </a>
     </section>
   </main>
