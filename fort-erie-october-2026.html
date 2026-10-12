@@ -28,8 +28,8 @@
     @media (max-width: 600px) { .site-header { top: 20px; left: 20px; right: 20px; height: 60px; } .site-brand-text { font-size: 1.5rem; } .site-brand-films { margin-top: 7px; font-size: .7rem; } .site-menu { gap: 12px; } .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; } .site-menu-links { top: 30px; right: 52px; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
-    .hero { position: relative; min-height: calc(115svh - 2cm); padding: 120px 30px 100px; text-align: center; }
-    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background-color: #111214; background-image: url('canada.jpg'); background-position: center 54%; background-size: cover; background-repeat: no-repeat; animation: heroSoftReveal 1.8s ease-out both; }
+    .hero { position: relative; min-height: calc(115svh - 2cm); padding: 120px 30px 100px; overflow: hidden; text-align: center; }
+    .hero-image { position: absolute; z-index: 0; inset: -6%; overflow: hidden; background-color: #111214; background-image: url('./cananda%202_1.32.1.jpg?v=20261012'); background-position: center 54%; background-size: cover; background-repeat: no-repeat; animation: heroSoftReveal 1.8s ease-out both; }
     @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
     .hero-inner { position: absolute; z-index: 1; top: 50%; right: 30px; left: 30px; display: flex; flex-direction: column; align-items: center; transform: translateY(-50%); }
@@ -48,10 +48,13 @@
     .video-frame.has-header { inset: 102px 0 0; }
     .video-frame iframe { display: block; width: 100vw; height: 100vh; height: 100dvh; max-width: none; aspect-ratio: auto; border: 0; }
     .video-frame.has-header iframe { height: calc(100vh - 102px); height: calc(100dvh - 102px); }
+    .video-header-dismiss { position: absolute; z-index: 1; inset: 0; display: none; border: 0; background: transparent; cursor: pointer; }
+    .video-frame.has-header .video-header-dismiss { display: block; }
     main, footer { transition: opacity .65s ease, visibility .65s ease; }
     body.is-playing main, body.is-playing footer { opacity: 0; visibility: hidden; pointer-events: none; }
     body.is-playing .site-header { opacity: 0; transform: translateY(-22px); pointer-events: none; }
     body.is-playing.has-video-header .site-header { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    body.is-playing.has-video-header .site-header { background: #000; box-shadow: 0 8px 24px rgba(0,0,0,.24); }
     body.is-playing.has-video-header .show-nav { z-index: 60; opacity: .72; pointer-events: auto; }
     @media (max-width: 600px) { .video-frame.has-header { inset: 80px 0 0; } .video-frame.has-header iframe { height: calc(100vh - 80px); height: calc(100dvh - 80px); } }
 
@@ -130,6 +133,7 @@
   <a class="show-nav show-nav-left" href="justin-hedge-show.html" aria-label="Previous show: The Justin Hedge Show">‹</a>
   <div class="video-frame" role="dialog" aria-modal="true" aria-label="Fort Erie October 2026 video">
     <iframe title="Drinking Johnnie Walker Whisky for the First Time" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <button class="video-header-dismiss" type="button" aria-label="Hide video header"></button>
   </div>
   <footer><svg class="footer-heron" width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heron">
       <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -154,6 +158,9 @@
       const videoFrame = document.querySelector('.video-frame');
       const video = videoFrame.querySelector('iframe');
       let headerHideTimer;
+      let wheelResetTimer;
+      let wheelGestureActive = false;
+      let touchStartY = null;
       const hideVideoHeader = () => {
         document.body.classList.remove('has-video-header');
         videoFrame.classList.remove('has-header');
@@ -172,6 +179,15 @@
         window.clearTimeout(headerHideTimer);
         headerHideTimer = window.setTimeout(hideVideoHeader, 10000);
       };
+      const toggleVideoHeader = () => {
+        if (!document.body.classList.contains('is-playing')) return;
+        if (document.body.classList.contains('has-video-header')) {
+          window.clearTimeout(headerHideTimer);
+          hideVideoHeader();
+        } else {
+          revealVideoHeader();
+        }
+      };
       scrollIndicator.addEventListener('click', (event) => {
         event.preventDefault();
         const videoId = scrollIndicator.dataset.videoId;
@@ -182,14 +198,28 @@
         window.clearTimeout(headerHideTimer);
       });
       videoFrame.addEventListener('click', (event) => { if (event.target === videoFrame) closeVideo(); });
+      videoFrame.querySelector('.video-header-dismiss').addEventListener('click', () => {
+        window.clearTimeout(headerHideTimer);
+        hideVideoHeader();
+      });
       document.addEventListener('click', (event) => {
         if (event.target.closest('[data-video-id]')) return;
         if (document.body.classList.contains('is-playing') && !videoFrame.contains(event.target)) closeVideo();
       });
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeVideo(); });
-      window.addEventListener('wheel', revealVideoHeader, { passive: true, capture: true });
-      window.addEventListener('touchmove', revealVideoHeader, { passive: true, capture: true });
-      window.addEventListener('scroll', revealVideoHeader, { passive: true });
+      window.addEventListener('wheel', (event) => {
+        if (!event.deltaY || !document.body.classList.contains('is-playing')) return;
+        if (!wheelGestureActive) toggleVideoHeader();
+        wheelGestureActive = true;
+        window.clearTimeout(wheelResetTimer);
+        wheelResetTimer = window.setTimeout(() => { wheelGestureActive = false; }, 450);
+      }, { passive: true, capture: true });
+      window.addEventListener('touchstart', (event) => { touchStartY = event.touches[0]?.clientY ?? null; }, { passive: true, capture: true });
+      window.addEventListener('touchend', (event) => {
+        const endY = event.changedTouches[0]?.clientY;
+        if (touchStartY !== null && endY !== undefined && Math.abs(endY - touchStartY) > 35) toggleVideoHeader();
+        touchStartY = null;
+      }, { passive: true, capture: true });
       const setMenuOpen = (isOpen) => {
         menu.classList.toggle('is-open', isOpen);
         button.setAttribute('aria-expanded', String(isOpen));
