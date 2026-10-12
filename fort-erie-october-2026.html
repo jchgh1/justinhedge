@@ -29,7 +29,7 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
     .hero { position: relative; min-height: calc(115svh - 2cm); padding: 120px 30px 100px; text-align: center; }
-    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('justinhedgehero.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
+    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background-color: #111214; background-image: url('canada.jpg'); background-position: center 54%; background-size: cover; background-repeat: no-repeat; animation: heroSoftReveal 1.8s ease-out both; }
     @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
     .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
     .hero-inner { position: absolute; z-index: 1; top: 50%; right: 30px; left: 30px; display: flex; flex-direction: column; align-items: center; transform: translateY(-50%); }
@@ -45,12 +45,15 @@
     .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: 1; filter: drop-shadow(0 0 12px rgba(255,255,255,.4)); }
     .video-frame { position: fixed; z-index: 40; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0; background: #000; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .65s ease, visibility .65s ease; }
     .video-frame.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    .video-frame.has-header { inset: 102px 0 0; }
     .video-frame iframe { display: block; width: 100vw; height: 100vh; height: 100dvh; max-width: none; aspect-ratio: auto; border: 0; }
+    .video-frame.has-header iframe { height: calc(100vh - 102px); height: calc(100dvh - 102px); }
     main, footer { transition: opacity .65s ease, visibility .65s ease; }
     body.is-playing main, body.is-playing footer { opacity: 0; visibility: hidden; pointer-events: none; }
     body.is-playing .site-header { opacity: 0; transform: translateY(-22px); pointer-events: none; }
     body.is-playing.has-video-header .site-header { opacity: 1; transform: translateY(0); pointer-events: auto; }
     body.is-playing.has-video-header .show-nav { z-index: 60; opacity: .72; pointer-events: auto; }
+    @media (max-width: 600px) { .video-frame.has-header { inset: 80px 0 0; } .video-frame.has-header iframe { height: calc(100vh - 80px); height: calc(100dvh - 80px); } }
 
     .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: .62; }
     @keyframes arrowPulse { 0%, 100% { opacity: .22; } 50% { opacity: .48; } }
@@ -109,6 +112,7 @@
       <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
       <a class="site-about" href="about.html">ABOUT</a>
       <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
+        <a href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
         <a href="fort-erie-october-2026.html">FORT ERIE OCTOBER 2026</a>
         <a href="filmarchive.html">ALL SHOWS</a>
       </nav>
@@ -116,7 +120,7 @@
   </header>
   <main>
     <section class="hero" aria-labelledby="show-title">
-      <div class="hero-image" role="img" aria-label="Open ocean and waves"></div>
+      <div class="hero-image" role="img" aria-label="Canadian flag waving against a blue sky"></div>
       <div class="hero-inner">
         <h1 class="show-title" id="show-title"><span>FORT ERIE</span><span>OCTOBER 2026</span></h1>
         <button class="scroll-indicator" type="button" aria-label="Play Fort Erie October 2026" data-video-id="b4eAUcHUURE">▶</button>
@@ -149,13 +153,24 @@
       const scrollIndicator = document.querySelector('.scroll-indicator');
       const videoFrame = document.querySelector('.video-frame');
       const video = videoFrame.querySelector('iframe');
+      let headerHideTimer;
+      const hideVideoHeader = () => {
+        document.body.classList.remove('has-video-header');
+        videoFrame.classList.remove('has-header');
+      };
       const closeVideo = () => {
+        window.clearTimeout(headerHideTimer);
         videoFrame.classList.remove('is-open');
+        hideVideoHeader();
         document.body.classList.remove('is-playing', 'has-video-header');
         video.src = '';
       };
       const revealVideoHeader = () => {
-        if (document.body.classList.contains('is-playing')) document.body.classList.add('has-video-header');
+        if (!document.body.classList.contains('is-playing')) return;
+        document.body.classList.add('has-video-header');
+        videoFrame.classList.add('has-header');
+        window.clearTimeout(headerHideTimer);
+        headerHideTimer = window.setTimeout(hideVideoHeader, 10000);
       };
       scrollIndicator.addEventListener('click', (event) => {
         event.preventDefault();
@@ -164,6 +179,7 @@
         video.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&playsinline=1&rel=0`;
         document.body.classList.add('is-playing');
         videoFrame.classList.add('is-open');
+        window.clearTimeout(headerHideTimer);
       });
       videoFrame.addEventListener('click', (event) => { if (event.target === videoFrame) closeVideo(); });
       document.addEventListener('click', (event) => {
