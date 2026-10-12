@@ -10,9 +10,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root { color-scheme: light; --page-bg: #fff; --accent: #516c78; --muted: #69777d; --rule: #d7dde0; }
     html { scroll-behavior: smooth; }
-    body { min-height: 100vh; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
-    body::before { position: fixed; z-index: 0; inset: 0; background: linear-gradient(rgba(6, 8, 9, .38), rgba(6, 8, 9, .48)), var(--active-show-image, none) center / cover no-repeat; content: ''; opacity: 0; pointer-events: none; transition: opacity 1.65s cubic-bezier(.2,.7,.2,1); }
-    body.has-active-show::before { opacity: 1; }
+    body { display: flex; min-height: 100vh; flex-direction: column; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
     body.has-active-show .show-title,
     body.has-active-show .show-series { color: rgba(255, 255, 255, .88); }
     .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
@@ -27,8 +25,23 @@
     .site-menu-links a { display: block; margin-bottom: 14px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; transition: color .3s ease, text-shadow .3s ease; }
     .site-menu-links a:hover { color: var(--accent); text-shadow: 0 0 12px #31516a; }
     .site-menu.is-open .site-menu-links { display: block; }
-    main { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(155px, calc(28vh - 2cm)) 0 130px; transition: color .4s ease; }
+    main { position: relative; z-index: 1; isolation: isolate; flex: 1 0 auto; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: max(155px, calc(28vh - 2cm)) 0 130px; transition: color .4s ease; }
+    main::before { position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; background: linear-gradient(rgba(6, 8, 9, .38), rgba(6, 8, 9, .48)), var(--active-show-image, none) center / cover no-repeat; content: ''; opacity: 0; pointer-events: none; transform: translateX(-50%); transition: opacity 1.65s cubic-bezier(.2,.7,.2,1); }
+    body.has-active-show main::before { opacity: 1; }
     .show-list { list-style: none; }
+    .show-group { padding-bottom: 6px; }
+    .show-group > .show-row { width: 100%; border: 0; background: transparent; font: inherit; text-align: left; cursor: pointer; }
+    .show-sublist { max-height: 0; overflow: hidden; list-style: none; padding: 0 0 0 24px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: max-height .45s ease, padding .45s ease, opacity .3s ease, transform .45s ease, visibility .45s; }
+    .show-group.is-expanded .show-sublist { max-height: 180px; padding-bottom: 12px; opacity: 1; visibility: visible; transform: translateY(0); }
+    @media (hover: hover) and (pointer: fine) { .show-group:hover .show-sublist, .show-group:focus-within .show-sublist { max-height: 180px; padding-bottom: 12px; opacity: 1; visibility: visible; transform: translateY(0); } }
+    .show-subrow { display: block; padding: 13px 0; color: #111; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.15rem, 2.3vw, 1.55rem); font-style: italic; text-decoration: none; transition: color .5s ease, padding-left .25s ease; }
+    .show-subrow:hover, .show-subrow:focus-visible { padding-left: 8px; }
+    body.has-active-show .show-subrow { color: rgba(255,255,255,.88); }
+    .archive-status { display: block; margin-top: 4px; color: var(--muted); font-family: Georgia, 'Times New Roman', serif; font-size: .84rem; font-style: italic; font-weight: 400; letter-spacing: 0; line-height: 1.45; }
+    body.has-active-show .archive-status { color: rgba(255,255,255,.72); }
+    .group-toggle-icon { display: inline-block; margin-left: 10px; font-family: Arial, sans-serif; font-size: .8em; transition: transform .25s ease; }
+    .show-group.is-expanded .group-toggle-icon { transform: rotate(90deg); }
+
     .show-row { display: grid; grid-template-columns: 1fr; align-items: start; gap: 18px; padding: 23px 0 26px; color: #111; text-decoration: none; transform-origin: left center; transition: opacity .85s cubic-bezier(.2,.7,.2,1), color .7s ease; }
     body.has-active-show .show-row:not(.is-active) { opacity: .68; }
     body.has-active-show .show-row:not(.is-active) .show-title { font-size: .62rem; }
@@ -41,7 +54,7 @@
     .show-row.is-active .show-year { display: block; opacity: 1; }
     body.has-active-show
     .show-row:focus-visible { outline: 1px solid rgba(255,255,255,.72); outline-offset: 8px; }
-    footer { position: relative; z-index: 1; padding: 28px 24px 34px; color: #444; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; transition: color .3s ease; }
+    footer { position: relative; z-index: 1; flex: 0 0 auto; width: 100%; margin-top: auto; padding: 28px 24px 34px; color: #444; background: #fff; font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; transition: color .3s ease; }
     body.has-active-show footer { color: #444; background: #fff; }
     @media (max-width: 600px) {
       .site-header { top: 20px; left: 20px; right: 20px; height: 60px; }
@@ -100,31 +113,23 @@
       <a class="site-about" href="about.html">ABOUT</a>
       <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
         <a href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
-        <a href="search-for-sidequests.html">THE SEARCH FOR SIDEQUESTS</a>
-        <a href="filmarchive.html">ALL SHOWS</a>
+        <a href="fort-erie-october-2026.html">FORT ERIE OCTOBER 2026</a>
       </nav>
     </div>
   </header>
   <main>
     <ol class="show-list">
-      <li>
-        <a class="show-row" href="search-for-sidequests.html" data-image="search for sidequests.jpg">
-          <span><span class="show-title">The Justin Hedge Show</span><span class="show-series">The Search for Sidequests</span><span class="show-year">2026</span></span>
-        </a>
+      <li class="show-group">
+        <button class="show-row" type="button" aria-expanded="false" data-image="justinhedgehero.jpg">
+          <span><span class="show-series">The Justin Hedge Show <span class="group-toggle-icon" aria-hidden="true">›</span></span><span class="archive-status">Coming soon</span></span>
+        </button>
+        <ul class="show-sublist" aria-label="The Justin Hedge Show series">
+          <li><a class="show-subrow" href="search-for-sidequests.html" data-image="search for sidequests.jpg"><span>The Search for Sidequests</span><span class="archive-status">Coming soon</span></a></li>
+        </ul>
       </li>
       <li>
-        <a class="show-row" href="justin-hedge-show.html" data-image="justinhedgehero.jpg">
-          <span><span class="show-title">The Justin Hedge Show</span><span class="show-series">More adventures coming soon</span><span class="show-year">SOON</span></span>
-        </a>
-      </li>
-      <li>
-        <a class="show-row placeholder-row" href="#" data-image="jazzclubfilms.jpg" aria-label="Placeholder show, coming soon">
-          <span><span class="show-title">A future production</span><span class="show-series">Untitled Show</span><span class="show-year">SOON</span></span>
-        </a>
-      </li>
-      <li>
-        <a class="show-row placeholder-row" href="#" data-image="justinhedgehero.jpg" aria-label="Placeholder show, coming soon">
-          <span><span class="show-title">A future production</span><span class="show-series">Untitled Show</span><span class="show-year">SOON</span></span>
+        <a class="show-row" href="fort-erie-october-2026.html" data-image="jazzclubfilms.jpg">
+          <span><span class="show-title">An Archival Documentary</span><span class="show-series">Fort Erie October 2026</span><span class="show-year">2026</span></span>
         </a>
       </li>
     </ol>
@@ -146,7 +151,9 @@
     JazzClub Films © 2026</footer>
   <script>
     (() => {
-      const rows = [...document.querySelectorAll('.show-row')];
+      const rows = [...document.querySelectorAll('.show-row, .show-subrow')];
+      const group = document.querySelector('.show-group');
+      const parentRow = group.querySelector('.show-row');
       const setActive = (row) => {
         document.body.classList.toggle('has-active-show', Boolean(row));
         rows.forEach((item) => item.classList.toggle('is-active', item === row));
@@ -163,10 +170,14 @@
         row.addEventListener('focus', () => setActive(row));
         row.addEventListener('mouseleave', () => { if (!row.matches(':focus')) setActive(null); });
         row.addEventListener('blur', () => setActive(null));
-        if (row.classList.contains('placeholder-row')) row.addEventListener('click', (event) => event.preventDefault());
+      });
+      parentRow.addEventListener('click', () => {
+        const expanded = parentRow.getAttribute('aria-expanded') !== 'true';
+        parentRow.setAttribute('aria-expanded', String(expanded));
+        group.classList.toggle('is-expanded', expanded);
       });
       document.querySelector('.show-list').addEventListener('mouseleave', () => {
-        if (!document.querySelector('.show-row:focus')) setActive(null);
+        if (!document.querySelector('.show-row:focus, .show-subrow:focus')) setActive(null);
       });
     })();
   </script>

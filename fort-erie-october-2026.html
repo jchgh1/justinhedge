@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico?v=20260926" type="image/x-icon">
+  <meta name="description" content="Fort Erie October 2026, a one-off film from JazzClub Films.">
+  <title>Fort Erie October 2026 — JazzClub Films</title>
+  <style>
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { color-scheme: light; --page-bg: #fff; --accent: #506956; --muted: #68736c; --rule: #d7ded9; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; background: var(--page-bg); color: #111; font-family: Arial, Helvetica, sans-serif; }
+    .site-header { position: absolute; top: 32px; left: 40px; right: 40px; z-index: 3; height: 70px; }
+    .site-brand { position: absolute; top: 0; left: 0; width: max-content; color: #fff; line-height: .85; text-decoration: none; }
+    .site-brand-text { display: block; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 900; }
+    .site-brand-films { display: block; width: 100%; margin-top: 8px; font-family: Georgia, 'Times New Roman', serif; font-size: .8rem; font-style: italic; letter-spacing: .35em; text-align: center; }
+    .site-menu { position: absolute; top: 0; right: 0; display: flex; align-items: center; gap: 26px; }
+    .site-menu-button, .site-about { padding: 0; border: 0; background: transparent; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; white-space: nowrap; cursor: pointer; transition: color .3s ease, text-shadow .3s ease; }
+    .site-menu-button:hover, .site-menu-button:focus-visible, .site-about:hover { color: var(--accent); text-shadow: 0 0 12px #3c5b4c; }
+    .site-menu-button:focus-visible, .site-brand:focus-visible, .site-menu-links a:focus-visible, .site-about:focus-visible, a:focus-visible { outline: 1px solid var(--accent); outline-offset: 5px; }
+    .site-menu-links { display: none; position: absolute; top: 36px; right: 65px; width: max-content; text-align: right; }
+    .site-menu-links a { display: block; margin-bottom: 14px; color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; transition: color .3s ease, text-shadow .3s ease; }
+    .site-menu-links a:hover { color: var(--accent); text-shadow: 0 0 12px #3c5b4c; }
+    .site-menu.is-open .site-menu-links { display: block; }
+    footer { padding: 28px 24px 34px; color: var(--muted); font-family: Georgia, 'Times New Roman', serif; font-size: .75rem; letter-spacing: .08em; text-align: center; }
+    @media (max-width: 600px) { .site-header { top: 20px; left: 20px; right: 20px; height: 60px; } .site-brand-text { font-size: 1.5rem; } .site-brand-films { margin-top: 7px; font-size: .7rem; } .site-menu { gap: 12px; } .site-menu-button, .site-about { font-size: .5rem; letter-spacing: .06em; } .site-menu-links { top: 30px; right: 52px; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+
+    .hero { position: relative; min-height: calc(115svh - 2cm); padding: 120px 30px 100px; text-align: center; }
+    .hero-image { position: absolute; z-index: 0; inset: 0; overflow: hidden; background: #111214 url('justinhedgehero.jpg?v=20260926') center 54% / cover no-repeat;  animation: heroSoftReveal 1.8s ease-out both; }
+    @keyframes heroSoftReveal { from { opacity: .78; } to { opacity: 1; } }
+    .hero-image::after { position: absolute; inset: 0; background: rgba(7, 11, 10, .3); content: ''; }
+    .hero-inner { position: absolute; z-index: 1; top: 50%; right: 30px; left: 30px; display: flex; flex-direction: column; align-items: center; transform: translateY(-50%); }
+    .show-title { color: #fff; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(3rem, 8.5vw, 8rem); font-weight: 900; line-height: .98; letter-spacing: 0; text-shadow: 0 0 18px rgba(255, 255, 255, .14); }
+    .show-title span { display: block; }
+    .show-nav { position: fixed; z-index: 20; top: 50%; right: 30px; display: grid; width: 58px; height: 72px; place-items: center; border: 0; border-radius: 0; background: transparent; color: #fff; font-size: 3.2rem; line-height: 1; text-decoration: none; text-shadow: 0 1px 12px rgba(0,0,0,.52); opacity: .68; transform: translateY(-50%); transition: opacity .25s ease, text-shadow .25s ease; }
+    .show-nav:hover, .show-nav:focus-visible { background: transparent; opacity: 1; text-shadow: 0 0 18px rgba(255,255,255,.62); }
+    .show-nav-left { left: 30px; right: auto; }
+    @media (max-width: 600px) { .show-nav { right: 14px; width: 40px; height: 54px; } .show-nav-left { left: 14px; right: auto; } }
+    .scroll-indicator { position: absolute; z-index: 2; bottom: 12svh; left: 50%; color: #fff; font-size: 1.45rem; line-height: 1; opacity: .28; text-decoration: none; transform: translateX(-50%); animation: arrowPulse 2.7s ease-in-out infinite; transition: filter .35s ease; }
+    .scroll-indicator.is-hidden { filter: opacity(0); pointer-events: none; }
+    .scroll-indicator { position: relative; inset: auto; display: grid; width: 76px; height: 76px; margin-top: clamp(28px, 6vh, 56px); place-items: center; border: 1px solid rgba(255,255,255,.8); border-radius: 50%; background: rgba(0,0,0,.24); color: #fff; font-size: 1.8rem; opacity: .88; text-decoration: none; transform: none; animation: none; cursor: pointer; }
+    .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: 1; filter: drop-shadow(0 0 12px rgba(255,255,255,.4)); }
+    .video-frame { position: fixed; z-index: 40; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0; background: #000; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .65s ease, visibility .65s ease; }
+    .video-frame.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    .video-frame iframe { display: block; width: 100vw; height: 100vh; height: 100dvh; max-width: none; aspect-ratio: auto; border: 0; }
+    main, footer { transition: opacity .65s ease, visibility .65s ease; }
+    body.is-playing main, body.is-playing footer { opacity: 0; visibility: hidden; pointer-events: none; }
+    body.is-playing .site-header { opacity: 0; transform: translateY(-22px); pointer-events: none; }
+    body.is-playing.has-video-header .site-header { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    body.is-playing.has-video-header .show-nav { z-index: 60; opacity: .72; pointer-events: auto; }
+
+    .scroll-indicator:hover, .scroll-indicator:focus-visible { opacity: .62; }
+    @keyframes arrowPulse { 0%, 100% { opacity: .22; } 50% { opacity: .48; } }
+    .series-overview { position: relative; z-index: 1; width: min(1100px, calc(100% - 80px)); margin: 0 auto; padding: 12px 0 130px; }
+    .series-row { display: grid; grid-template-columns: 1fr; gap: 15px; align-items: baseline; padding: 27px 0 30px; color: #111; text-align: left; text-decoration: none; transition: padding-left .25s ease, color .25s ease; }
+    .series-row:hover { padding-left: 10px; color: #111; }
+    .series-name { display: block; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.35rem, 3vw, 2rem); font-style: italic; }
+    .series-year { display: block; max-height: 0; margin-top: 0; overflow: hidden; color: var(--muted); font-size: .72rem; letter-spacing: .1em; opacity: 0; transition: max-height .4s ease, margin-top .4s ease, opacity .4s ease; }
+    .series-row:hover .series-year, .series-row:focus-visible .series-year { max-height: 1.5em; margin-top: 16px; opacity: 1; }
+    @media (max-width: 600px) { .hero { min-height: calc(115svh - 2cm); padding: 110px 20px 100px; } .hero-inner { top: 50%; right: 20px; left: 20px; } .show-title { font-size: clamp(1.7rem, 9vw, 4.5rem); } .scroll-indicator { width: 66px; height: 66px; margin-top: 28px; } .series-overview { width: calc(100% - 40px); padding: 12px 0 90px; } .series-row { grid-template-columns: 1fr; gap: 10px; } }
+
+    /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
+    .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; width: auto; height: 102px; margin: 0; padding: 0; background: transparent; transition: transform .3s ease, opacity .35s ease, background-color .25s ease, box-shadow .25s ease; }
+    .site-header.is-hidden { transform: translateY(-100%); }
+    .site-header.is-visible-on-scroll { background: transparent; box-shadow: none; }
+    .site-header.is-visible-on-scroll::after { position: absolute; right: 40px; bottom: 0; left: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); content: ''; filter: blur(1px); pointer-events: none; }
+    .site-header .site-brand { top: 32px; left: 40px; }
+    .site-header .site-menu { top: 32px; right: 40px; }
+    .site-header .site-brand,
+    .site-header .site-menu-button,
+    .site-header .site-about,
+    .site-header .site-menu-links a { color: #111; text-shadow: none; }
+    .site-header.is-on-image .site-brand,
+    .site-header.is-on-image .site-menu-button,
+    .site-header.is-on-image .site-about,
+    .site-header.is-on-image .site-menu-links a { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .35); }
+    .site-header.is-visible-on-scroll::after { background: linear-gradient(90deg, transparent, rgba(20, 24, 25, .12) 12%, rgba(20, 24, 25, .18) 50%, rgba(20, 24, 25, .12) 88%, transparent); }
+    .site-header.is-visible-on-scroll.is-on-image::after { background: linear-gradient(90deg, transparent, rgba(231, 239, 232, .2) 12%, rgba(231, 239, 232, .3) 50%, rgba(231, 239, 232, .2) 88%, transparent); }
+    .site-header.is-visible-on-scroll .site-menu-links { padding: 10px 0 2px; background: transparent; }
+    .site-header.is-visible-on-scroll .site-menu-links a:hover,
+    .site-header.is-visible-on-scroll .site-menu-button:hover,
+    .site-header.is-visible-on-scroll .site-about:hover { color: var(--accent, #c3d3dc); text-shadow: none; }
+    .site-header.is-visible-on-scroll .site-menu-button:focus-visible,
+    .site-header.is-visible-on-scroll .site-about:focus-visible,
+    .site-header.is-visible-on-scroll .site-menu-links a:focus-visible { outline-color: var(--accent, #c3d3dc); }
+    @media (max-width: 600px) {
+      .site-header { height: 80px; }
+      .site-header.is-visible-on-scroll::after { right: 20px; left: 20px; }
+      .site-header .site-brand { top: 20px; left: 20px; }
+      .site-header .site-menu { top: 20px; right: 20px; }
+    }
+
+    .footer-heron { display: block; flex: 0 0 auto; width: 34px; height: 24px; margin: 0; color: #252a26; }
+    footer { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding-top: 28px; color: #444; background: #fff; }
+    footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
+    body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
+  </style>
+</head>
+<body>
+  <header class="site-header is-on-image">
+    <a class="site-brand" href="index.html" aria-label="JazzClub Films home">
+      <span class="site-brand-text">JAZZCLUB</span>
+      <span class="site-brand-films">films</span>
+    </a>
+    <div class="site-menu">
+      <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
+      <a class="site-about" href="about.html">ABOUT</a>
+      <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
+        <a href="fort-erie-october-2026.html">FORT ERIE OCTOBER 2026</a>
+        <a href="filmarchive.html">ALL SHOWS</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="show-title">
+      <div class="hero-image" role="img" aria-label="Open ocean and waves"></div>
+      <div class="hero-inner">
+        <h1 class="show-title" id="show-title"><span>FORT ERIE</span><span>OCTOBER 2026</span></h1>
+        <button class="scroll-indicator" type="button" aria-label="Play Fort Erie October 2026" data-video-id="b4eAUcHUURE">▶</button>
+      </div>
+    </section>
+  </main>
+  <a class="show-nav show-nav-left" href="justin-hedge-show.html" aria-label="Previous show: The Justin Hedge Show">‹</a>
+  <div class="video-frame" role="dialog" aria-modal="true" aria-label="Fort Erie October 2026 video">
+    <iframe title="Drinking Johnnie Walker Whisky for the First Time" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <footer><svg class="footer-heron" width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heron">
+      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M330 358 L326 415"/>
+        <path d="M326 415 L318 428 M326 415 L326 430 M326 415 L334 428"/>
+        <path d="M355 356 L352 410"/>
+        <path d="M352 410 L344 423 M352 410 L352 425 M352 410 L360 423"/>
+        <path d="M235 315 Q270 245 340 240 Q400 235 415 275 Q422 315 395 340 Q335 362 270 340 L235 315 Z"/>
+        <path d="M340 240 Q315 180 340 140 Q360 105 410 100 Q455 98 465 140 Q472 185 450 220 Q432 250 458 285 Q478 315 472 345"/>
+        <ellipse cx="480" cy="350" rx="22" ry="17"/>
+        <path d="M500 348 Q528 345 542 355 Q528 358 500 358"/>
+        <circle cx="488" cy="345" r="2" fill="currentColor" stroke="none"/>
+        <path d="M345 255 Q300 270 292 305 Q305 328 348 318"/>
+      </g>
+    </svg>
+    JazzClub Films © 2026</footer>
+  <script>
+    (() => {
+      const menu = document.querySelector('.site-menu');
+      const button = document.querySelector('.site-menu-button');
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      const videoFrame = document.querySelector('.video-frame');
+      const video = videoFrame.querySelector('iframe');
+      const closeVideo = () => {
+        videoFrame.classList.remove('is-open');
+        document.body.classList.remove('is-playing', 'has-video-header');
+        video.src = '';
+      };
+      const revealVideoHeader = () => {
+        if (document.body.classList.contains('is-playing')) document.body.classList.add('has-video-header');
+      };
+      scrollIndicator.addEventListener('click', (event) => {
+        event.preventDefault();
+        const videoId = scrollIndicator.dataset.videoId;
+        if (!videoId || videoId === 'ADD_VIDEO_ID') return;
+        video.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&playsinline=1&rel=0`;
+        document.body.classList.add('is-playing');
+        videoFrame.classList.add('is-open');
+      });
+      videoFrame.addEventListener('click', (event) => { if (event.target === videoFrame) closeVideo(); });
+      document.addEventListener('click', (event) => {
+        if (event.target.closest('[data-video-id]')) return;
+        if (document.body.classList.contains('is-playing') && !videoFrame.contains(event.target)) closeVideo();
+      });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeVideo(); });
+      window.addEventListener('wheel', revealVideoHeader, { passive: true, capture: true });
+      window.addEventListener('touchmove', revealVideoHeader, { passive: true, capture: true });
+      window.addEventListener('scroll', revealVideoHeader, { passive: true });
+      const setMenuOpen = (isOpen) => {
+        menu.classList.toggle('is-open', isOpen);
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.setAttribute('aria-label', isOpen ? 'Close other productions' : 'Open other productions');
+      };
+      button.addEventListener('click', () => setMenuOpen(button.getAttribute('aria-expanded') !== 'true'));
+      document.addEventListener('click', (event) => { if (!menu.contains(event.target)) setMenuOpen(false); });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setMenuOpen(false); button.focus(); } });
+    })();
+</script>
+
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const hero = document.querySelector('.hero, .series-hero');
+      const updateContrast = () => header.classList.toggle('is-on-image', document.body.classList.contains('is-playing') || Boolean(hero && window.scrollY < hero.offsetHeight * .92));
+      let previousY = window.scrollY;
+      updateContrast();
+      if (previousY > 0) header.classList.add('is-visible-on-scroll');
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        updateContrast();
+        if (currentY <= 0) {
+          header.classList.remove('is-hidden', 'is-visible-on-scroll');
+        } else if (currentY < previousY) {
+          header.classList.remove('is-hidden');
+          header.classList.add('is-visible-on-scroll');
+        } else if (currentY > header.offsetHeight) {
+          header.classList.add('is-hidden');
+          header.classList.remove('is-visible-on-scroll');
+        }
+        previousY = currentY;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>

@@ -54,6 +54,9 @@
     .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .95rem; }
     .episode-teaser { display: block; max-width: 680px; max-height: 0; margin-top: 0; overflow: hidden; color: #454743; font-family: Georgia, 'Times New Roman', serif; font-size: .92rem; line-height: 1.5; opacity: 0; transition: max-height .45s ease, margin-top .45s ease, opacity .45s ease; }
     .episode-row:hover .episode-teaser, .episode-row:focus-visible .episode-teaser { max-height: 4.5em; margin-top: 9px; opacity: 1; }
+    .coming-soon, .episode-status { color: #92999b; font-family: Georgia, 'Times New Roman', serif; font-size: .9rem; font-style: italic; font-weight: 400; letter-spacing: 0; line-height: 1.5; }
+    .coming-soon { margin-top: 18px; }
+    .episode-status { display: block; margin-top: 4px; }
     @media (max-width: 600px) { .series-hero { min-height: calc(115svh - 2cm); padding: 105px 20px 55px; } .series-hero-inner { top: 50svh; right: 20px; left: 20px; } .series-title { margin-top: 19px; font-size: clamp(2.35rem, 10vw, 3.8rem); } .series-content { width: calc(100% - 40px); padding: 12px 0 85px; } .episode-archive { padding-top: 8px; } .archive-heading { margin-bottom: 14px; } .episode-row { grid-template-columns: 1fr; gap: 9px; min-height: 62px; } .episode-title { font-size: .9rem; } .episode-row:hover .episode-title, .episode-row:focus-visible .episode-title { font-size: .945rem; } .episode-list:has(.episode-row:hover) .episode-row:not(:hover) .episode-title, .episode-list:has(.episode-row:focus-visible) .episode-row:not(:focus-visible) .episode-title { font-size: .855rem; } }
 
     /* Shared auto-hide header: clear at the top, white-backed on upward scroll. */
@@ -111,15 +114,16 @@
       <div class="series-hero-inner">
         <a class="franchise-title" href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
         <h1 class="series-title" id="series-title">The Search for Sidequests</h1>
+        <p class="coming-soon">Coming soon</p>
       </div>
       <a class="scroll-indicator" href="#series-content" aria-label="Scroll down to series information and episodes">↓︎</a>
     </section>
     <div class="series-content" id="series-content">
       <section class="episode-archive" aria-label="Episode archive">
         <ul class="episode-list">
-          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">Justin Finds Himself in China</span><span class="episode-teaser">Justin travels to China in search of what might come next.</span></span></a></li>
-          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">Justin Figures Out How to Surf</span><span class="episode-teaser">Justin takes on the unfamiliar challenge of learning to surf.</span></span></a></li>
-          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">Justin Gets Married</span><span class="episode-teaser">Justin wonders whether marriage could be his next great sidequest.</span></span></a></li>
+          <li><a class="episode-row" href="episode-01.html"><span><span class="episode-title">Justin Finds Himself in China</span><span class="episode-status">Coming soon</span><span class="episode-teaser">Justin travels to China in search of what might come next.</span></span></a></li>
+          <li><a class="episode-row" href="episode-02.html"><span><span class="episode-title">Justin Figures Out How to Surf</span><span class="episode-status">Coming soon</span><span class="episode-teaser">Justin takes on the unfamiliar challenge of learning to surf.</span></span></a></li>
+          <li><a class="episode-row" href="episode-03.html"><span><span class="episode-title">Justin Gets Married</span><span class="episode-status">Coming soon</span><span class="episode-teaser">Justin wonders whether marriage could be his next great sidequest.</span></span></a></li>
         </ul>
       </section>
     </div>
