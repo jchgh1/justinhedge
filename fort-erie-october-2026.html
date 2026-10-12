@@ -115,8 +115,8 @@
       <button class="site-menu-button" type="button" aria-label="Open other productions" aria-expanded="false" aria-controls="site-menu-links">OTHER PRODUCTIONS</button>
       <a class="site-about" href="about.html">ABOUT</a>
       <nav class="site-menu-links" id="site-menu-links" aria-label="Other productions">
-        <a href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
         <a href="fort-erie-october-2026.html">FORT ERIE OCTOBER 2026</a>
+        <a href="justin-hedge-show.html">THE JUSTIN HEDGE SHOW</a>
         <a href="filmarchive.html">ALL SHOWS</a>
       </nav>
     </div>
@@ -126,13 +126,13 @@
       <div class="hero-image" role="img" aria-label="Canadian flag waving against a blue sky"></div>
       <div class="hero-inner">
         <h1 class="show-title" id="show-title"><span>FORT ERIE</span><span>OCTOBER 2026</span></h1>
-        <button class="scroll-indicator" type="button" aria-label="Play Fort Erie October 2026" data-video-id="b4eAUcHUURE">▶</button>
+        <button class="scroll-indicator" type="button" aria-label="Play Fort Erie October 2026" data-video-id="oveFSL6XhzI">▶</button>
       </div>
     </section>
   </main>
-  <a class="show-nav show-nav-left" href="justin-hedge-show.html" aria-label="Previous show: The Justin Hedge Show">‹</a>
+  <a class="show-nav" href="justin-hedge-show.html" aria-label="Next show: The Justin Hedge Show">›</a>
   <div class="video-frame" role="dialog" aria-modal="true" aria-label="Fort Erie October 2026 video">
-    <iframe title="Drinking Johnnie Walker Whisky for the First Time" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <iframe title="Fort Erie October 2026" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     <button class="video-header-dismiss" type="button" aria-label="Hide video header"></button>
   </div>
   <footer><svg class="footer-heron" width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heron">
@@ -192,7 +192,7 @@
         event.preventDefault();
         const videoId = scrollIndicator.dataset.videoId;
         if (!videoId || videoId === 'ADD_VIDEO_ID') return;
-        video.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&playsinline=1&rel=0`;
+        video.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&playsinline=1&rel=0`;
         document.body.classList.add('is-playing');
         videoFrame.classList.add('is-open');
         window.clearTimeout(headerHideTimer);
