@@ -83,7 +83,9 @@
     footer { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding-top: 28px; color: #444; background: #fff; }
     footer::before { position: absolute; top: 0; left: 50%; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .025) 8%, rgba(0, 0, 0, .05) 50%, rgba(0, 0, 0, .025) 92%, transparent 100%); box-shadow: 0 0 10px rgba(0, 0, 0, .025); content: ''; filter: blur(.65px); transform: translateX(-50%); pointer-events: none; }
     body.has-active-show footer::before { background: linear-gradient(90deg, transparent 0%, rgba(232, 242, 234, .1) 8%, rgba(232, 242, 234, .24) 50%, rgba(232, 242, 234, .1) 92%, transparent 100%); box-shadow: 0 0 12px rgba(232, 242, 234, .16); }
-  </style>
+  
+    main { min-height: 100vh; }
+</style>
 </head>
 <body>
   <header class="site-header is-on-image">
@@ -166,6 +168,7 @@
       }, { passive: true });
     })();
   </script>
+
 
 </body>
 </html>
